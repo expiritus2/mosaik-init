@@ -4,6 +4,11 @@ module.exports = {
         "es2020": true,
         "node": true,
     },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
@@ -19,5 +24,6 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "no-unused-vars": "warn"
     }
 };
