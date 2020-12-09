@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useResize } from 'hooks';
 import ScreenContext from 'contexts/screen';
 
-import AppRouter from '../AppRouter';
+import { AppRouter } from 'components';
 
 const App = () => {
     const { screen } = useResize();

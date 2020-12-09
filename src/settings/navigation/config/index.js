@@ -1,7 +1,9 @@
 import mainPageConfig from './main';
 import notFoundPageConfig from './not-found';
 
-export default [
+const navConfig = [
     ...mainPageConfig,
     ...notFoundPageConfig,
 ];
+
+export default navConfig;

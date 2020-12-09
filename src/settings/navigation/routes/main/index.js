@@ -1,3 +1,5 @@
-export default {
+const mainPageRoutes = {
     index: '/',
 };
+
+export default mainPageRoutes;

@@ -1,5 +1,7 @@
 import { NotFound } from 'pages';
 
-export default [
+const notFoundNavConfig = [
     { path: '*', component: NotFound },
 ];
+
+export default notFoundNavConfig;
