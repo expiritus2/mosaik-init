@@ -13,14 +13,6 @@ const Main = (props) => {
         loadInner({});
     };
 
-    const test = {
-        name: {
-            name2: 'test',
-        },
-    };
-
-    console.log(test?.name?.name2);
-
     return (
         <div className={classNames(styles.container, 'container')}>
             Main Page
