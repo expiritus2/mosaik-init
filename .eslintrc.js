@@ -52,5 +52,6 @@ module.exports = {
         'jsx-a11y/no-noninteractive-element-interactions': 'off',
         'object-curly-newline': 'off',
         'no-plusplus': 'off',
+        'no-unused-vars': 'warn',
     },
 };
