@@ -6,6 +6,8 @@ import ScreenContext from 'contexts/screen';
 
 import { AppRouter } from 'components';
 
+import 'styles/global.scss';
+
 const App = () => {
     const { screen } = useResize();
 
