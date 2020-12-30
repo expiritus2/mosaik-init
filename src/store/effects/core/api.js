@@ -1,27 +1,27 @@
 import { PENDING, READY, ERROR } from 'settings/constants/api-state';
 
 export default class Api {
-    static execBase(ACTION, method) {
+    static execBase(action, method) {
         return (cfg = {}, options = {}, cb) => (
-            Api.execFunc({ cfg, options, ACTION, method, cb })
+            Api.execFunc({ cfg, options, action, method, cb })
         );
     }
 
-    static execSuccessful(ACTION, method) {
+    static execResult(action, method) {
         return (cfg = {}, options = {}, cb) => (
-            Api.execFunc({ cfg, options, ACTION, method, pending: false, cb })
+            Api.execFunc({ cfg, options, action, method, pending: false, cb })
         );
     }
 
-    static execFunc({ cfg, options, ACTION, method, pending = true, cb }) {
+    static execFunc({ cfg, options, action, method, pending = true, cb }) {
         return async (dispatch) => {
             if (pending) {
-                Api.setPending({ dispatch, ACTION });
+                Api.setPending({ dispatch, action });
             }
 
             try {
                 const response = await method(cfg, options);
-                Api.setData({ dispatch, ACTION, cfg: { ...cfg, ...response.meta }, response });
+                Api.setData({ dispatch, action, cfg: { ...cfg, ...response.meta }, response });
 
                 if (typeof cb === 'function') {
                     cb(null, response);
@@ -29,7 +29,7 @@ export default class Api {
             } catch (err) {
                 const config = { ...cfg, status: err.response.status, message: err.message };
 
-                Api.setError({ dispatch, ACTION, cfg: config, response: err });
+                Api.setError({ dispatch, action, cfg: config, response: err });
 
                 if (typeof cb === 'function') {
                     cb(err);
@@ -38,15 +38,15 @@ export default class Api {
         };
     }
 
-    static setPending({ dispatch, ACTION }) {
-        dispatch(ACTION({ state: PENDING }));
+    static setPending({ dispatch, action }) {
+        dispatch(action({ state: PENDING }));
     }
 
-    static setData({ dispatch, ACTION, cfg, response }) {
-        dispatch(ACTION({ state: READY, data: response.data, meta: cfg }));
+    static setData({ dispatch, action, cfg, response }) {
+        dispatch(action({ state: READY, data: response.data, meta: cfg }));
     }
 
-    static setError({ dispatch, ACTION, cfg }) {
-        dispatch(ACTION({ state: ERROR, data: undefined, meta: cfg }));
+    static setError({ dispatch, action, cfg }) {
+        dispatch(action({ state: ERROR, data: undefined, meta: cfg }));
     }
 }
