@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { IDLE } from 'settings/constants/api-state';
 import { getDataFor } from 'store/helpers';
 
-import { getTest } from 'store/actions/app';
+import { getTestPinsAction } from 'store/actions/app';
 
 const initialData = {
     state: IDLE,
@@ -11,7 +11,7 @@ const initialData = {
 };
 
 export default handleActions({
-    [getTest]: (state, { payload }) => ({
+    [getTestPinsAction]: (state, { payload }) => ({
         ...state,
         state: payload.state,
         data: getDataFor('data', payload, initialData),

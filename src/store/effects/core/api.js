@@ -27,7 +27,7 @@ export default class Api {
                     cb(null, response);
                 }
             } catch (err) {
-                const config = { ...cfg, status: err.response.status, message: err.message };
+                const config = { ...cfg, status: err?.response?.status, message: err.message };
 
                 Api.setError({ dispatch, action, cfg: config, response: err });
 

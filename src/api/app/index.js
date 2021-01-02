@@ -1,5 +1,7 @@
-import { apiServer } from 'settings/api';
+import { jsonPlaceholderServer } from 'settings/web-services/api';
+import { server } from 'settings/web-services/graphql';
 import { getPromiseAllSettledProp, getPromiseAllSettledReason } from 'store/helpers';
+import { GET_PINS_QUERY } from 'queries';
 
 export function getTestData(cfg) {
     const postsReq = getPosts(cfg);
@@ -23,9 +25,17 @@ export function getTestData(cfg) {
 }
 
 export function getPosts(cfg) {
-    return apiServer.get('/posts', cfg);
+    return jsonPlaceholderServer.get('/posts', cfg);
 }
 
 export function getComments(cfg) {
-    return apiServer.get('/comments', cfg);
+    return jsonPlaceholderServer.get('/comments', cfg);
+}
+
+export function getPins(cfg) {
+    return new Promise((resolve, reject) => {
+        server.query({ query: GET_PINS_QUERY, variables: cfg })
+            .then((resp) => resolve({ data: resp?.data?.getPins, meta: cfg }))
+            .catch(reject);
+    });
 }
