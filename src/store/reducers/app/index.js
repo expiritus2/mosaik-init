@@ -1,9 +1,20 @@
-import { combineReducers } from 'redux';
+import { handleActions } from 'redux-actions';
+import { IDLE } from 'settings/constants/api-state';
+import { getDataFor } from 'store/helpers';
 
-import data from './data';
-import state from './state';
+import { getTestPinsAction } from 'store/actions/app';
 
-export default combineReducers({
-    data,
-    state,
-});
+const initialData = {
+    state: IDLE,
+    data: null,
+    meta: {},
+};
+
+export default handleActions({
+    [getTestPinsAction]: (state, { payload }) => ({
+        ...state,
+        state: payload.state,
+        data: getDataFor('data', payload, initialData),
+        meta: getDataFor('meta', payload, initialData),
+    }),
+}, initialData);

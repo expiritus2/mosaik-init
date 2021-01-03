@@ -1,13 +1,9 @@
+import { Logger } from 'helpers';
 import Api from 'store/effects/core/api';
 import { getTestData, getPins } from 'api/app';
-import { getTestAction, getTestPinsAction } from 'store/actions/app';
-import { server } from 'settings/web-services/graphql';
-import { Logger } from 'helpers';
-
 import { PIN_UPDATE_SUBSCRIPTION } from 'queries';
-
-export const loadTestEffect = Api.execBase(getTestAction, getTestData);
-export const loadPinsEffect = Api.execBase(getTestPinsAction, getPins);
+import { server } from 'settings/web-services/graphql';
+import { getTestAction, getTestPinsAction } from 'store/actions/app';
 
 let chatSubscription = null;
 
@@ -22,3 +18,6 @@ export const chatEffect = {
     },
     unsubscribe: () => () => chatSubscription?.unsubscribe(),
 };
+
+export const loadTestEffect = Api.execBase(getTestAction, getTestData);
+export const loadPinsEffect = Api.execBase(getTestPinsAction, getPins);
