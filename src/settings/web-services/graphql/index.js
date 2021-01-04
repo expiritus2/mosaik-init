@@ -25,4 +25,5 @@ const splitLink = split(({ query }) => {
 export const server = new ApolloClient({
     link: splitLink,
     cache: new InMemoryCache(),
+    // credentials: process.env.NODE_ENV === 'production' ? 'same-origin' : 'include',
 });
