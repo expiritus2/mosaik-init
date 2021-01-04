@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import { Forbidden } from 'pages';
-import { SUPER_ADMIN } from 'settings/constants/roles';
 
 const AppRoute = ({ roles: routeRoles, component, userRole, ...rest }) => {
     let Component = component;
@@ -26,10 +24,4 @@ AppRoute.defaultProps = {
     roles: undefined,
 };
 
-function mapStateToProps() {
-    return {
-        userRole: SUPER_ADMIN,
-    };
-}
-
-export default connect(mapStateToProps)(AppRoute);
+export default AppRoute;
