@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import routesConfig from 'settings/navigation/config';
-import { SUPER_ADMIN } from 'settings/constants/roles';
+import connect from './connect';
 
 const AppRouter = ({ userRole }) => (
     <Switch>
@@ -18,10 +17,4 @@ AppRouter.propTypes = {
     userRole: PropTypes.string.isRequired,
 };
 
-function mapStateToProps() {
-    return {
-        userRole: SUPER_ADMIN,
-    };
-}
-
-export default connect(mapStateToProps)(AppRouter);
+export default connect(AppRouter);
