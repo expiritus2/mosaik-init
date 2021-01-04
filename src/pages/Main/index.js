@@ -5,7 +5,7 @@ import connect from './connect';
 
 import styles from './styles.module.scss';
 
-const Component = ({ loadInner, logout, loading, posts }) => {
+const Main = ({ loadInner, logout, loading, posts }) => {
     const onClick = () => {
         loadInner({});
     };
@@ -26,11 +26,11 @@ const Component = ({ loadInner, logout, loading, posts }) => {
     );
 };
 
-Component.propTypes = {
+Main.propTypes = {
     loadInner: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     posts: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default connect(Component);
+export default connect(Main);
