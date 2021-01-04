@@ -53,5 +53,6 @@ module.exports = {
         'object-curly-newline': 'off',
         'no-plusplus': 'off',
         'no-unused-vars': 'warn',
+        'react/prop-types': 'warn',
     },
 };
