@@ -1,33 +1,36 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { load } from 'store/effects/app';
 import classNames from 'classnames';
+import connect from './connect';
 
 import styles from './styles.module.scss';
 
-const Main = (props) => {
+const Component = ({ loadInner, logout, loading, posts }) => {
     const onClick = () => {
-        const { loadInner } = props;
         loadInner({});
     };
 
     return (
-        <div className={classNames(styles.container, 'container')}>
-            Main Page
+        <div>
             <button type="button" onClick={onClick}>Click me</button>
+            <button type="button" onClick={logout}>Logout</button>
+            <div className={classNames(styles.container, 'container')}>
+                <div>
+                    {loading && 'Loading'}
+                    {!!posts?.length && posts.map((post) => (
+                        <div key={post.id}>{post.title}</div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
 
-Main.propTypes = {
+Component.propTypes = {
     loadInner: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+    posts: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default connect(
-    null,
-    {
-        loadInner: load,
-    },
-)(Main);
+export default connect(Component);

@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { IDLE } from 'settings/constants/api-state';
 import { getDataFor } from 'store/helpers';
 
-import { getTest } from 'store/actions/app';
+import { requestGetTestAction, appLogoutAction } from 'store/actions/app';
 
 const initialData = {
     state: IDLE,
@@ -11,10 +11,11 @@ const initialData = {
 };
 
 export default handleActions({
-    [getTest]: (state, { payload }) => ({
+    [requestGetTestAction]: (state, { payload }) => ({
         ...state,
         state: payload.state,
         data: getDataFor('data', payload, initialData),
         meta: getDataFor('meta', payload, initialData),
     }),
+    [appLogoutAction]: () => initialData,
 }, initialData);
