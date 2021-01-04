@@ -1,4 +1,4 @@
-import { apiServer } from 'settings/api';
+import { apiServer } from 'settings/web-services/api';
 import { getPromiseAllSettledProp, getPromiseAllSettledReason } from 'store/helpers';
 
 export function getTestData(cfg) {
