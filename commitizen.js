@@ -1,31 +1,30 @@
 module.exports = {
-    // Добавим описание на русском языке ко всем типам
     types: [
         {
             value: 'build',
-            name: 'build: Сборка проекта или изменения внешних зависимостей',
+            name: 'build: Build the project or change external dependencies',
         },
-        { value: 'ci', name: 'ci: Настройка CI и работа со скриптами' },
-        { value: 'docs', name: 'docs: Обновление документации' },
-        { value: 'feat', name: 'feat: Добавление нового функционала' },
-        { value: 'fix', name: 'fix: Исправление ошибок' },
+        { value: 'ci', name: 'ci: Setting up CI and working with scripts' },
+        { value: 'docs', name: 'docs: Documentation update' },
+        { value: 'feat', name: 'feat: Adding new functionality' },
+        { value: 'fix', name: 'fix: Error correction' },
         {
             value: 'perf',
-            name: 'perf: Изменения направленные на улучшение производительности',
+            name: 'perf: Changes to improve performance',
         },
         {
             value: 'refactor',
-            name: 'refactor:  Правки кода без исправления ошибок или добавления новых функций',
+            name: 'refactor:  Code changes without fixing bugs or adding new features',
         },
-        { value: 'revert', name: 'revert: Откат на предыдущие коммиты' },
+        { value: 'revert', name: 'revert: Rollback to previous commits' },
         {
             value: 'style',
-            name: 'style: Правки по кодстайлу (табы, отступы, точки, запятые и т.д.)',
+            name: 'style: Codestyle edits (tabs, indents, periods, commas, etc.)',
         },
-        { value: 'test', name: 'test: Добавление тестов' },
+        { value: 'test', name: 'test: Adding tests' },
     ],
 
-    // Область. Она характеризует фрагмент кода, которую затронули изменения
+    // Scopes. It characterizes the piece of code affected by the changes
     scopes: [
         { name: 'components' },
         { name: 'containers' },
@@ -37,7 +36,7 @@ module.exports = {
         { name: 'middlewares' },
     ],
 
-    // Возможность задать спец ОБЛАСТЬ для определенного типа коммита (пример для 'fix')
+    // Ability to set a special AREA for a specific commit type (example for 'fix')
     /*
   scopeOverrides: {
     fix: [
@@ -48,26 +47,26 @@ module.exports = {
   },
   */
 
-    // Поменяем дефолтные вопросы
+    // Let's change the default questions
     messages: {
-        type: 'Какие изменения вы вносите?',
-        scope: '\nВыберите ОБЛАСТЬ, которую вы изменили (опционально):',
-        // Спросим если allowCustomScopes в true
-        customScope: 'Укажите свою ОБЛАСТЬ:',
-        subject: 'Напишите КОРОТКОЕ описание в ПОВЕЛИТЕЛЬНОМ наклонении:\n',
-        body: 'Напишите ПОДРОБНОЕ описание (опционально). Используйте "|" для новой строки:\n',
-        breaking: 'BREAKING CHANGES List(optional):\n',
-        footer: 'Место для мета данных (тикетов и ссылок). Например: SECRETMRKT-700, SECRETMRKT-800:\n',
-        confirmCommit: 'Вас устраивает получившийся коммит?',
+        type: 'What changes are you making?',
+        scope: '\nSelect the AREA you changed (optional):',
+        // СAsk if allowCustomScopes is true
+        customScope: 'Enter your SCOPE:',
+        subject: 'Write a SHORT description in IMMEDIATE mood:\n',
+        body: 'Write a DETAILED description (optional). Use "|" for a new line:\n',
+        breaking: 'BREAKING CHANGES List (optional):\n',
+        footer: 'Place for metadata (tickets and links). For example: SECRETMRKT-700, SECRETMRKT-800:\n',
+        confirmCommit: 'You are satisfied with the resulting commit',
     },
 
-    // Разрешим собственную ОБЛАСТЬ
+    // Let's resolve our own SCOPE
     allowCustomScopes: true,
 
-    // Запрет на Breaking Changes
+    // Ban on Breaking Changes
     allowBreakingChanges: false,
 
-    // Префикс для нижнего колонтитула
+    // Footer prefix
     footerPrefix: 'META: ',
 
     // limit subject length
