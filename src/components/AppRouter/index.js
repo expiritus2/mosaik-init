@@ -6,16 +6,13 @@ import AppRoute from './AppRoute';
 
 import connect from './connect';
 
-const AppRouter = ({ userRole }) => {
-    console.log(routesConfig);
-    return (
-        <Switch>
-            {routesConfig.map((route) => (
-                <AppRoute key={route.path} userRole={userRole} {...route} />
-            ))}
-        </Switch>
-    );
-};
+const AppRouter = ({ userRole }) => (
+    <Switch>
+        {routesConfig.map((route) => (
+            <AppRoute key={route.path} userRole={userRole} {...route} />
+        ))}
+    </Switch>
+);
 
 AppRouter.propTypes = {
     userRole: PropTypes.string.isRequired,
