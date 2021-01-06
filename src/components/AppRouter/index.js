@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import routesConfig from 'settings/navigation/config';
-import AppRoute from './AppRoute';
 
 import connect from './connect';
 
 const AppRouter = ({ userRole }) => (
     <Switch>
-        {routesConfig.map((route) => (
-            <AppRoute key={route.path} userRole={userRole} {...route} />
+        {routesConfig(userRole).map(({ path, component, exact }) => (
+            <Route key={path} path={path} component={component} exact={exact} />
         ))}
     </Switch>
 );
