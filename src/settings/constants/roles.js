@@ -1,4 +1,6 @@
-export const SUPER_ADMIN = 'superAdmin';
-export const ADMIN = 'admin';
-export const USER = 'user';
-export const AGENT = 'agent';
+export const BUYER = 'Buyer';
+export const SELLER = 'Seller';
+export const AGENT = 'Agent';
+export const THIRD_PARTY = 'ThirdParty';
+export const BROKERAGE_ADMIN = 'BrokerageAdmin';
+export const SUPER_USER = 'SuperUser';

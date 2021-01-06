@@ -1,16 +1,20 @@
 import commonRoutesConfig from './common';
-import superAdminRoutesConfig from './super-admin';
-import adminRoutesConfig from './admin';
+import buyerRoutesConfig from './buyer';
+import sellerRoutesConfig from './seller';
 import agentRoutesConfig from './agent';
-import userRoutesConfig from './user';
+import thirdPartyRoutesConfig from './third-party';
+import brokerageAdminRoutesConfig from './brokerage-admin';
+import superUserRoutesConfig from './super-user';
 import notFound from './not-found';
 
 const allRoutes = [
     ...commonRoutesConfig,
-    ...superAdminRoutesConfig,
-    ...adminRoutesConfig,
+    ...buyerRoutesConfig,
+    ...sellerRoutesConfig,
     ...agentRoutesConfig,
-    ...userRoutesConfig,
+    ...thirdPartyRoutesConfig,
+    ...brokerageAdminRoutesConfig,
+    ...superUserRoutesConfig,
     ...notFound,
 ];
 
