@@ -13,4 +13,4 @@ const mapDispatchToProps = {
     logout: appLogoutEffect,
 };
 
-export default (Component) => connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps);
