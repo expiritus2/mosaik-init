@@ -1,27 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+
+import { Button, Select } from 'components';
+
 import connect from './connect';
+import Posts from './Posts';
 
 import styles from './styles.module.scss';
 
-const Main = ({ loadInner, logout, loading, posts }) => {
+const Main = ({ loadInner, logout }) => {
     const onClick = () => {
         loadInner({});
     };
 
+    const options = [
+        { value: 'chocolate', name: 'Chocolate' },
+        { value: 'strawberry', name: 'Strawberry' },
+        { value: 'vanilla', name: 'Vanilla' },
+    ];
+
     return (
         <div>
-            <button type="button" onClick={onClick}>Click me</button>
-            <button type="button" onClick={logout}>Logout</button>
-            <div className={classNames(styles.container, 'container')}>
-                <div>
-                    {loading && 'Loading'}
-                    {!!posts?.length && posts.map((post) => (
-                        <div key={post.id}>{post.title}</div>
-                    ))}
-                </div>
-            </div>
+            <Button title="Click me" onClick={onClick} />
+            <Button title="Logout" onClick={logout} />
+            <Select options={options} />
+            <Posts className={styles.container} />
         </div>
     );
 };
@@ -29,8 +32,6 @@ const Main = ({ loadInner, logout, loading, posts }) => {
 Main.propTypes = {
     loadInner: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    posts: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default connect(Main);

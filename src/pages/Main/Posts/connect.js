@@ -1,16 +1,12 @@
 import { connect } from 'react-redux';
 
-import { appLogoutEffect, appLoadEffect } from 'store/effects/app';
-import { isLoading, getPosts } from 'store/selectors/app';
+import { isPendingPostsSelector, getPostsSelector } from 'store/selectors/app';
 
 const mapStateToProps = (state) => ({
-    isPending: isLoading(state),
-    posts: getPosts(state),
+    isPending: isPendingPostsSelector(state),
+    posts: getPostsSelector(state),
 });
 
-const mapDispatchToProps = {
-    loadInner: appLoadEffect,
-    logout: appLogoutEffect,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps);

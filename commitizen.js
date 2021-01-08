@@ -53,7 +53,7 @@ module.exports = {
         scope: '\nSelect the AREA you changed (optional):',
         // СAsk if allowCustomScopes is true
         customScope: 'Enter your SCOPE:',
-        subject: 'Write a SHORT description in IMMEDIATE mood:\n',
+        subject: 'Write a SHORT description in IMMEDIATE mood (max 72 symbols):\n',
         body: 'Write a DETAILED description (optional). Use "|" for a new line:\n',
         breaking: 'BREAKING CHANGES List (optional):\n',
         footer: 'Place for metadata (tickets and links). For example: SECRETMRKT-700, SECRETMRKT-800:\n',

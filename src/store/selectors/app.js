@@ -3,17 +3,17 @@ import { PENDING, ERROR } from 'settings/constants/api-state';
 
 const localState = ({ app }) => app;
 
-export const isLoading = createSelector(
+export const isPendingPostsSelector = createSelector(
     localState,
     ({ state }) => state === PENDING,
 );
 
-export const isError = createSelector(
+export const isErrorLoadingPostsSelector = createSelector(
     localState,
     ({ state }) => state === ERROR,
 );
 
-export const getPosts = createSelector(
+export const getPostsSelector = createSelector(
     localState,
     ({ data }) => data?.posts || [],
 );

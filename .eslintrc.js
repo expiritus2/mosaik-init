@@ -54,5 +54,6 @@ module.exports = {
         'no-plusplus': 'off',
         'no-unused-vars': 'warn',
         'react/prop-types': 'warn',
+        'react/button-has-type': 'off',
     },
 };
