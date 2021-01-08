@@ -2,8 +2,12 @@
 @import "styles/variables";
 @import "styles/functions";
 
+.selectWrapper {
+    @include input;
+}
+
 .container {
-    width: setUnit(200);
+    width: 100%;
 
     .value {
         width: 100%;
@@ -24,8 +28,6 @@
         }
 
         .input {
-            @include input;
-
             cursor: pointer;
             position: relative;
             width: 100%;

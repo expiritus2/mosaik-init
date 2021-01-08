@@ -1,0 +1,5 @@
+@import "styles/mixins";
+
+.button {
+    @include button($bg: #0019fe, $color: white);
+}

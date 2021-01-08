@@ -1,7 +1,7 @@
 @import "styles/mixins";
 
-.dateInput {
+.inputWrapper {
     @include input;
-    cursor: pointer;
-}
 
+    width: 100%;
+}

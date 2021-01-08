@@ -8,22 +8,27 @@ import styles from './styles.module.scss';
 import './styles.scss';
 
 const DatePicker = (props) => {
-    const { date, onChange, className, options } = props;
+    const { id, date, onChange, className, options, label } = props;
 
     return (
-        <FlatPickr
-            className={classNames(styles.dateInput, className)}
-            value={moment(date).valueOf()}
-            onChange={onChange}
-            options={{
-                enableTime: false,
-                ...options,
-            }}
-        />
+        <div className={styles.dateInput}>
+            {label && <label htmlFor={id}>{label}</label>}
+            <FlatPickr
+                className={classNames(className)}
+                value={moment(date).valueOf()}
+                onChange={onChange}
+                options={{
+                    enableTime: false,
+                    ...options,
+                }}
+            />
+        </div>
     );
 };
 
 DatePicker.propTypes = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    label: PropTypes.string,
     className: PropTypes.string,
     date: PropTypes.oneOfType([
         PropTypes.number,
@@ -36,6 +41,8 @@ DatePicker.propTypes = {
 };
 
 DatePicker.defaultProps = {
+    id: undefined,
+    label: undefined,
     className: '',
     date: undefined,
     onChange: () => {},

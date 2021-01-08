@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Select, DatePicker } from 'components';
+import { Button, Select, DatePicker, Input, Textarea } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -23,8 +23,12 @@ const Main = ({ loadInner, logout }) => {
         <div>
             <Button title="Click me" onClick={onClick} />
             <Button title="Logout" onClick={logout} />
-            <Select options={options} />
-            <DatePicker />
+            <form className={styles.form}>
+                <Select options={options} />
+                <DatePicker label="Date label" />
+                <Input type={Input.TYPE_NUMBER} label="Test input label" />
+                <Textarea label="Test textarea label" />
+            </form>
             <Posts className={styles.container} />
         </div>
     );

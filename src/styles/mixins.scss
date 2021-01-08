@@ -2,11 +2,35 @@
 @import "styles/functions";
 
 @mixin input() {
-    padding: setUnit(5);
-    border: 1px solid darken($grey-color, 10);
+    label {
+        display: block;
+        font-size: setUnit(16);
+    }
+
+    input,
+    textarea,
+    select {
+        padding: setUnit(5);
+        border: 1px solid darken($grey-color, 10);
+        border-radius: setUnit(5);
+        outline: none;
+        margin: 0;
+        width: 100%;
+    }
+}
+
+@mixin button($bg: #000, $color: #fff) {
+    background-color: $bg;
+    color: $color;
+    border: none;
+    padding: setUnit(5) setUnit(15);
     border-radius: setUnit(5);
+    cursor: pointer;
     outline: none;
-    margin: 0;
+
+    &:hover {
+        background-color: lighten($bg, 10);
+    }
 }
 
 @mixin box-shadow($color: #000000) {

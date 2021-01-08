@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import styles from './syles.module.scss';
 
 const SelectComponent = (props) => {
-    const { defaultValue, onSelect, options, className } = props;
+    const { id, defaultValue, onSelect, options, label, className } = props;
     const { name, search, multiple, placeholder, value } = props;
 
     const onChange = (val) => {
@@ -15,21 +15,28 @@ const SelectComponent = (props) => {
     };
 
     return (
-        <SelectSearch
-            search={search}
-            multiple={multiple}
-            onChange={onChange}
-            className={(key) => classNames(styles[key], className[key])}
-            options={options}
-            value={get(value, 'value', value) || get(defaultValue, 'value', defaultValue)}
-            name={name}
-            placeholder={placeholder}
-        />
+        <div className={classNames(styles.selectWrapper, className.wrapper)}>
+            {label && <label htmlFor={id}>{label}</label>}
+            <SelectSearch
+                id={id}
+                name={name}
+                search={search}
+                options={options}
+                multiple={multiple}
+                onChange={onChange}
+                placeholder={placeholder}
+                className={(key) => classNames(styles[key], className[key])}
+                value={get(value, 'value', value) || get(defaultValue, 'value', defaultValue)}
+            />
+        </div>
     );
 };
 
 SelectComponent.propTypes = {
-    className: PropTypes.shape({}),
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    className: PropTypes.shape({
+        wrapper: PropTypes.string,
+    }),
     defaultValue: PropTypes.oneOfType([
         PropTypes.shape({ name: PropTypes.string, value: PropTypes.string }),
         PropTypes.string,
@@ -44,10 +51,14 @@ SelectComponent.propTypes = {
     multiple: PropTypes.bool,
     placeholder: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
+    label: PropTypes.string,
 };
 
 SelectComponent.defaultProps = {
-    className: {},
+    id: undefined,
+    className: {
+        wrapper: '',
+    },
     defaultValue: undefined,
     onSelect: () => {},
     name: null,
@@ -55,6 +66,7 @@ SelectComponent.defaultProps = {
     multiple: false,
     placeholder: 'Select',
     value: null,
+    label: undefined,
 };
 
 export default SelectComponent;
