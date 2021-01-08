@@ -17,16 +17,12 @@ const SelectComponent = (props) => {
         onSelect(find(options, { value: val }));
     };
 
-    const onClassName = (key) => (
-        className[key] ? classNames(styles[key], className[key]) : styles[key]
-    );
-
     return (
         <SelectSearch
             search={search}
             multiple={multiple}
             onChange={onChange}
-            className={onClassName}
+            className={(key) => classNames(styles[key], className[key])}
             options={options}
             value={optionValue}
             name={name}
