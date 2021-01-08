@@ -3,7 +3,7 @@
 @import "styles/functions";
 
 .container {
-    max-width: setUnit(200);
+    width: setUnit(200);
 
     .value {
         width: 100%;
@@ -28,7 +28,7 @@
 
             cursor: pointer;
             position: relative;
-            max-width: 100%;
+            width: 100%;
             padding-right: setUnit(30);
             text-overflow: ellipsis;
         }
