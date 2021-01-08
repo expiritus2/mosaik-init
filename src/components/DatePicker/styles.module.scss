@@ -1,0 +1,6 @@
+@import "styles/mixins";
+
+.dateInput {
+    @include input;
+    cursor: pointer;
+}

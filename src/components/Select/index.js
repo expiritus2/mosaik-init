@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SelectSearch from 'react-select-search';
 import { find, get } from 'lodash-es';
@@ -8,12 +8,9 @@ import styles from './syles.module.scss';
 
 const SelectComponent = (props) => {
     const { defaultValue, onSelect, options, className } = props;
-    const { name, search, multiple, placeholder } = props;
-
-    const [optionValue, setOptionValue] = useState(get(defaultValue, 'value', defaultValue));
+    const { name, search, multiple, placeholder, value } = props;
 
     const onChange = (val) => {
-        setOptionValue(val);
         onSelect(find(options, { value: val }));
     };
 
@@ -24,7 +21,7 @@ const SelectComponent = (props) => {
             onChange={onChange}
             className={(key) => classNames(styles[key], className[key])}
             options={options}
-            value={optionValue}
+            value={get(value, 'value', value) || get(defaultValue, 'value', defaultValue)}
             name={name}
             placeholder={placeholder}
         />
@@ -46,6 +43,7 @@ SelectComponent.propTypes = {
     search: PropTypes.bool,
     multiple: PropTypes.bool,
     placeholder: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
 };
 
 SelectComponent.defaultProps = {
@@ -56,6 +54,7 @@ SelectComponent.defaultProps = {
     search: false,
     multiple: false,
     placeholder: 'Select',
+    value: null,
 };
 
 export default SelectComponent;

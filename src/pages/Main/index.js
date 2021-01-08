@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Select } from 'components';
+import { Button, Select, DatePicker } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -24,6 +24,7 @@ const Main = ({ loadInner, logout }) => {
             <Button title="Click me" onClick={onClick} />
             <Button title="Logout" onClick={logout} />
             <Select options={options} />
+            <DatePicker />
             <Posts className={styles.container} />
         </div>
     );
