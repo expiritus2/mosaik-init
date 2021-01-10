@@ -9,10 +9,6 @@ import Posts from './Posts';
 import styles from './styles.module.scss';
 
 const Main = ({ loadInner, logout, loadPins }) => {
-    const onClick = () => {
-        loadInner({});
-    };
-
     const options = [
         { value: 'chocolate', name: 'Chocolate' },
         { value: 'strawberry', name: 'Strawberry' },
@@ -21,8 +17,8 @@ const Main = ({ loadInner, logout, loadPins }) => {
 
     return (
         <div>
-            <Button title="Click me" onClick={onClick} />
-            <Button title="Logout" onClick={logout} />
+            <Button title="Click me" onClick={() => loadInner()} />
+            <Button title="Logout" onClick={() => logout} />
             <Button title="Load Pins" onClick={() => loadPins()} />
             <form className={styles.form}>
                 <Select options={options} label="Select label" error="Required" />
