@@ -18,10 +18,10 @@ const allRoutes = [
     ...notFound,
 ];
 
-const navConfig = (userRole) => (
+const navConfig = (userRoles) => (
     allRoutes.filter(({ roles: routeRoles }) => {
         if (!routeRoles) return true;
-        return routeRoles.includes(userRole);
+        return routeRoles.some((routeRole) => userRoles.includes(routeRole));
     }));
 
 export default navConfig;

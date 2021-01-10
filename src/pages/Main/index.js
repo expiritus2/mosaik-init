@@ -26,7 +26,7 @@ const Main = ({ loadInner, logout }) => {
             <form className={styles.form}>
                 <Select options={options} />
                 <DatePicker label="Date label" />
-                <Input type={Input.TYPE_NUMBER} label="Test input label" />
+                <Input label="Test input label" />
                 <Textarea label="Test textarea label" />
             </form>
             <Posts className={styles.container} />

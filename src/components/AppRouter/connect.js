@@ -4,7 +4,7 @@ import { SUPER_USER } from 'settings/constants/roles';
 
 function mapStateToProps() {
     return {
-        userRole: SUPER_USER,
+        userRoles: [SUPER_USER],
     };
 }
 
