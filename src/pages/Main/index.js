@@ -1,45 +1,44 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { loadTestEffect, loadPinsEffect, chatEffect } from 'store/effects/app';
-import classNames from 'classnames';
+import { Button, Select, DatePicker, Input, Textarea } from 'components';
+
+import connect from './connect';
+import Posts from './Posts';
 
 import styles from './styles.module.scss';
 
-const Main = (props) => {
+const Main = ({ loadInner, logout, loadPins }) => {
     const onClick = () => {
-        const { loadPins, subscribeChat } = props;
-        loadPins();
-        subscribeChat();
+        loadInner({});
     };
 
-    const onUnsubscribe = () => {
-        const { unsubscribeChat } = props;
-        unsubscribeChat();
-    };
+    const options = [
+        { value: 'chocolate', name: 'Chocolate' },
+        { value: 'strawberry', name: 'Strawberry' },
+        { value: 'vanilla', name: 'Vanilla' },
+    ];
 
     return (
-        <div className={classNames(styles.container, 'container')}>
-            Main Page
-            <button type="button" onClick={onClick}>Click me</button>
-            <button type="button" onClick={onUnsubscribe}>Unsubscribe</button>
+        <div>
+            <Button title="Click me" onClick={onClick} />
+            <Button title="Logout" onClick={logout} />
+            <Button title="Load Pins" onClick={() => loadPins()} />
+            <form className={styles.form}>
+                <Select options={options} label="Select label" error="Required" />
+                <DatePicker label="Date label" error="Required" />
+                <Input label="Test input label" placeholder="Input text" error="Required" />
+                <Textarea label="Test textarea label" placeholder="Text area input" error="Required" />
+            </form>
+            <Posts className={styles.container} />
         </div>
     );
 };
 
 Main.propTypes = {
+    loadInner: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     loadPins: PropTypes.func.isRequired,
-    subscribeChat: PropTypes.func.isRequired,
-    unsubscribeChat: PropTypes.func.isRequired,
 };
 
-export default connect(
-    null,
-    {
-        loadTest: loadTestEffect,
-        loadPins: loadPinsEffect,
-        subscribeChat: chatEffect.subscribe,
-        unsubscribeChat: chatEffect.unsubscribe,
-    },
-)(Main);
+export default connect(Main);

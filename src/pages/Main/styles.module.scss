@@ -1,6 +1,9 @@
-@import "styles/variables";
 @import "styles/functions";
 
 .container {
-  display: flex;
+    height: 100vh;
+}
+
+.form {
+    width: setUnit(200);
 }

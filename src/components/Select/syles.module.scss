@@ -1,0 +1,100 @@
+@import "styles/mixins";
+@import "styles/variables";
+@import "styles/functions";
+
+.selectWrapper {
+    @include input;
+
+    .input {
+        border-width: 1px;
+        border-radius: setUnit(5);
+    }
+}
+
+.container {
+    width: 100%;
+
+    .value {
+        width: 100%;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: calc(50% - #{setUnit(5)});
+            right: setUnit(15);
+            width: setUnit(7);
+            height: setUnit(7);
+            transform: rotate(45deg);
+            border-right: 1px solid darken($grey-color, 50);
+            border-bottom: 1px solid darken($grey-color, 50);
+            pointer-events: none;
+        }
+
+        .input {
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+            padding-right: setUnit(30);
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.has-focus {
+
+    }
+
+    .select {
+        position: relative;
+        width: 100%;
+
+        .options {
+            @include box-shadow;
+
+            margin-top: setUnit(2);
+            border: 1px solid $grey-color;
+            border-radius: setUnit(5);
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            background-color: #ffffff;
+            z-index: 99;
+
+            .option {
+                width: 100%;
+                border: none;
+                cursor: pointer;
+                padding: setUnit(5) setUnit(10);
+                background-color: transparent;
+                text-align: left;
+
+                &:hover {
+                    background-color: $grey-color;
+                }
+
+                &.is-highlighted {
+                    background-color: $grey-color;
+                }
+
+                &.is-selected {
+                    background-color: $grey-color;
+                }
+            }
+
+            &.is-loading {
+                display: block;
+            }
+
+            .group {
+                display: block;
+
+                &-header {
+                    background-color: $grey-color;
+                    padding: setUnit(5) setUnit(10);
+                }
+            }
+        }
+    }
+}

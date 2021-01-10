@@ -1,18 +1,39 @@
 import { PENDING, READY, ERROR } from 'settings/constants/api-state';
 
 export default class Api {
-    static execBase(action, method) {
+    /**
+     * @param action - redux-action function.
+     * @param  method - request function returning Promise }
+     * @returns function passing cfg = {}, options = {} for the method and cb(error, result) function
+     */
+    static execBase({ action, method }) {
         return (cfg = {}, options = {}, cb) => (
             Api.execFunc({ cfg, options, action, method, cb })
         );
     }
 
-    static execResult(action, method) {
+    /**
+     *
+     * @param action - redux action
+     * @param method - function for sending request
+     * @returns {function(*=, *=, *): function(*): Promise<void>}
+     */
+    static execResult({ action, method }) {
         return (cfg = {}, options = {}, cb) => (
             Api.execFunc({ cfg, options, action, method, pending: false, cb })
         );
     }
 
+    /**
+     *
+     * @param cfg - params for request
+     * @param options - passing callbacks for request
+     * @param action - redux action
+     * @param method - function for sending request
+     * @param pending - inserted pending state to redux store
+     * @param cb - callback by success or failure request
+     * @returns {function(*): Promise<void>}
+     */
     static execFunc({ cfg, options, action, method, pending = true, cb }) {
         return async (dispatch) => {
             if (pending) {
@@ -38,14 +59,32 @@ export default class Api {
         };
     }
 
+    /**
+     *
+     * @param dispatch - redux dispatch
+     * @param action - redux action (redux-actions library)
+     */
     static setPending({ dispatch, action }) {
         dispatch(action({ state: PENDING }));
     }
 
+    /**
+     *
+     * @param dispatch - redux dispatch
+     * @param action - redux action
+     * @param cfg - request params
+     * @param response
+     */
     static setData({ dispatch, action, cfg, response }) {
         dispatch(action({ state: READY, data: response.data, meta: cfg }));
     }
 
+    /**
+     *
+     * @param dispatch - redux dispatch
+     * @param action - redux action
+     * @param cfg - request params
+     */
     static setError({ dispatch, action, cfg }) {
         dispatch(action({ state: ERROR, data: undefined, meta: cfg }));
     }

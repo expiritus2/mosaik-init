@@ -1,0 +1,7 @@
+@import "styles/mixins";
+
+.inputWrapper {
+    @include input;
+
+    width: 100%;
+}

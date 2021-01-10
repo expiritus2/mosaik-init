@@ -1,0 +1,9 @@
+@import "styles/mixins";
+
+.inputWrapper {
+    @include input;
+
+    .inputField {
+        resize: none;
+    }
+}
