@@ -4,8 +4,9 @@ import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-const Button = ({ title, type, disabled, className, onClick }) => (
+const Button = ({ id, title, type, disabled, className, onClick }) => (
     <button
+        id={id}
         type={type}
         disabled={disabled}
         className={classNames(styles.button, className)}
@@ -15,7 +16,11 @@ const Button = ({ title, type, disabled, className, onClick }) => (
     </button>
 );
 
+Button.TYPE_BUTTON = 'button';
+Button.TYPE_SUBMIT = 'submit';
+
 Button.propTypes = {
+    id: PropTypes.string,
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
     type: PropTypes.string,
@@ -25,7 +30,8 @@ Button.propTypes = {
 
 Button.defaultProps = {
     className: '',
-    type: 'button',
+    id: undefined,
+    type: Button.TYPE_BUTTON,
     disabled: false,
     onClick: () => {},
 };

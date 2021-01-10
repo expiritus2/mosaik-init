@@ -24,10 +24,10 @@ const Main = ({ loadInner, logout }) => {
             <Button title="Click me" onClick={onClick} />
             <Button title="Logout" onClick={logout} />
             <form className={styles.form}>
-                <Select options={options} />
-                <DatePicker label="Date label" />
-                <Input label="Test input label" />
-                <Textarea label="Test textarea label" />
+                <Select options={options} label="Select label" error="Required" />
+                <DatePicker label="Date label" error="Required" />
+                <Input label="Test input label" placeholder="Input text" error="Required" />
+                <Textarea label="Test textarea label" placeholder="Text area input" error="Required" />
             </form>
             <Posts className={styles.container} />
         </div>

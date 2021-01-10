@@ -8,10 +8,10 @@ import styles from './syles.module.scss';
 
 const SelectComponent = (props) => {
     const { id, defaultValue, onSelect, options, label, className } = props;
-    const { name, search, multiple, placeholder, value } = props;
+    const { name, search, multiple, placeholder, value, disabled, error } = props;
 
     const onChange = (val) => {
-        onSelect(find(options, { value: val }));
+        onSelect({ target: { value: val } }, find(options, { value: val }));
     };
 
     return (
@@ -19,6 +19,7 @@ const SelectComponent = (props) => {
             {label && <label htmlFor={id}>{label}</label>}
             <SelectSearch
                 id={id}
+                disabled={disabled}
                 name={name}
                 search={search}
                 options={options}
@@ -28,12 +29,14 @@ const SelectComponent = (props) => {
                 className={(key) => classNames(styles[key], className[key])}
                 value={get(value, 'value', value) || get(defaultValue, 'value', defaultValue)}
             />
+            {error && <div className={styles.error}>{error}</div>}
         </div>
     );
 };
 
 SelectComponent.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    disabled: PropTypes.bool,
     className: PropTypes.shape({
         wrapper: PropTypes.string,
     }),
@@ -52,6 +55,7 @@ SelectComponent.propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     label: PropTypes.string,
+    error: PropTypes.string,
 };
 
 SelectComponent.defaultProps = {
@@ -67,6 +71,8 @@ SelectComponent.defaultProps = {
     placeholder: 'Select',
     value: null,
     label: undefined,
+    disabled: undefined,
+    error: undefined,
 };
 
 export default SelectComponent;

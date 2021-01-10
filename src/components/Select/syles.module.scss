@@ -4,6 +4,11 @@
 
 .selectWrapper {
     @include input;
+
+    .input {
+        border-width: 1px;
+        border-radius: setUnit(5);
+    }
 }
 
 .container {

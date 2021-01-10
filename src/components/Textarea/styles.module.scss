@@ -2,4 +2,8 @@
 
 .inputWrapper {
     @include input;
+
+    .inputField {
+        resize: none;
+    }
 }

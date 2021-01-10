@@ -1,21 +1,11 @@
 import commonRoutesConfig from './common';
-import buyerRoutesConfig from './buyer';
-import sellerRoutesConfig from './seller';
-import agentRoutesConfig from './agent';
-import thirdPartyRoutesConfig from './third-party';
-import brokerageAdminRoutesConfig from './brokerage-admin';
-import superUserRoutesConfig from './super-user';
-import notFound from './not-found';
+import protectedRoutesConfig from './protected';
+import { NotFound } from '../../../pages';
 
 const allRoutes = [
     ...commonRoutesConfig,
-    ...buyerRoutesConfig,
-    ...sellerRoutesConfig,
-    ...agentRoutesConfig,
-    ...thirdPartyRoutesConfig,
-    ...brokerageAdminRoutesConfig,
-    ...superUserRoutesConfig,
-    ...notFound,
+    ...protectedRoutesConfig,
+    { path: '*', component: NotFound },
 ];
 
 const navConfig = (userRoles) => (
