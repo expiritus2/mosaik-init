@@ -18,7 +18,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
     return (
         <div>
             <Button title="Click me" onClick={() => loadInner()} />
-            <Button title="Logout" onClick={() => logout} />
+            <Button title="Logout" onClick={() => logout()} />
             <Button title="Load Pins" onClick={() => loadPins()} />
             <form className={styles.form}>
                 <Select options={options} label="Select label" error="Required" />
