@@ -17,3 +17,8 @@ export const getPostsSelector = createSelector(
     localState,
     ({ data }) => data?.posts || [],
 );
+
+export const isAuth = createSelector(
+    localState,
+    ({ auth }) => !!auth,
+);
