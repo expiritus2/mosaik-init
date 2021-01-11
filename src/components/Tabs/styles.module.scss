@@ -1,6 +1,20 @@
+@import "styles/functions";
 @import "styles/variables";
 
-.tabs {
-    display: flex;
-    border-bottom: 1px solid $grey-color;
+.wrapper {
+
+    &.horizontal {
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid $grey-color;
+        }
+    }
+
+    &.vertical {
+        display: flex;
+
+        .tabs {
+            border-right: 1px solid $input-border-color;
+        }
+    }
 }

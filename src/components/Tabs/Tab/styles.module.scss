@@ -2,12 +2,27 @@
 @import "styles/functions";
 
 .tab {
-    border-bottom: 2px solid transparent;
+    padding: setUnit(10);
     cursor: pointer;
-    margin-right: setUnit(15);
 
-    &.active {
-        border-color: lighten(#000, 5);
-        font-weight: bold;
+    &:hover {
+        background-color: $grey-color;
+    }
+
+    &.horizontal {
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        margin-right: setUnit(15);
+
+        &.active {
+            border-color: lighten(#000, 5);
+            font-weight: bold;
+        }
+    }
+
+    &.vertical {
+        &.active {
+            background-color: $grey-color;
+        }
     }
 }
