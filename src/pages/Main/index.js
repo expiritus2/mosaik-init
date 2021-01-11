@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import moment from 'moment';
+import { Logger } from 'helpers';
 
 import { Button, Select, DatePicker, Input, Textarea } from 'components';
 
@@ -12,7 +13,7 @@ import styles from './styles.module.scss';
 
 const Main = ({ loadInner, logout, loadPins }) => {
     const onSubmit = (value) => {
-        console.log(value);
+        Logger.log(value);
     };
 
     const formik = useFormik({

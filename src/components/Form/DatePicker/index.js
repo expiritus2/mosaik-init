@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlatPickr from 'react-flatpickr';
 import classNames from 'classnames';
+// TODO: Probable react icons should be removed
 import { FiCalendar } from 'react-icons/fi';
 
 import styles from './styles.module.scss';
