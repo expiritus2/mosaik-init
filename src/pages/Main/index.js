@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFormik } from 'formik';
 
 import { Button, Select, DatePicker, Input, Textarea } from 'components';
 
@@ -9,6 +10,20 @@ import Posts from './Posts';
 import styles from './styles.module.scss';
 
 const Main = ({ loadInner, logout, loadPins }) => {
+    const onSubmit = (value) => {
+        console.log(value);
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            select: '',
+            date: [],
+            input: '',
+            textarea: '',
+        },
+        onSubmit,
+    });
+
     const options = [
         { value: 'chocolate', name: 'Chocolate' },
         { value: 'strawberry', name: 'Strawberry' },
@@ -20,11 +35,31 @@ const Main = ({ loadInner, logout, loadPins }) => {
             <Button title="Click me" onClick={() => loadInner()} />
             <Button title="Logout" onClick={() => logout()} />
             <Button title="Load Pins" onClick={() => loadPins()} />
-            <form className={styles.form}>
-                <Select options={options} label="Select label" error="Required" />
-                <DatePicker label="Date label" error="Required" />
-                <Input label="Test input label" placeholder="Input text" error="Required" />
-                <Textarea label="Test textarea label" placeholder="Text area input" error="Required" />
+            <form onSubmit={formik.handleSubmit} className={styles.form}>
+                <Select
+                    name="select"
+                    options={options}
+                    label="Select label"
+                    onSelect={formik.handleChange}
+                />
+                <DatePicker
+                    name="date"
+                    label="Date label"
+                    onChange={formik.handleChange}
+                />
+                <Input
+                    name="input"
+                    label="Test input label"
+                    placeholder="Input text"
+                    onChange={formik.handleChange}
+                />
+                <Textarea
+                    name="textarea"
+                    label="Test textarea label"
+                    placeholder="Text area input"
+                    onChange={formik.handleChange}
+                />
+                <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>
             <Posts className={styles.container} />
         </div>

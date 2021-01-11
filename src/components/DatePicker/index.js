@@ -13,7 +13,7 @@ const DatePicker = (props) => {
     const { placeholder, disabled, error } = props;
 
     const onChangeHandler = (newDate) => {
-        onChange({ target: { value: newDate } }, newDate);
+        onChange({ target: { value: newDate, name } }, newDate);
     };
 
     return (

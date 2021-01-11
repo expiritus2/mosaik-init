@@ -11,8 +11,22 @@ const SelectComponent = (props) => {
     const { name, search, multiple, placeholder, value, disabled, error } = props;
 
     const onChange = (val) => {
-        onSelect({ target: { value: val } }, find(options, { value: val }));
+        const fakeEvent = { target: { value: val, name } };
+        if (Array.isArray(val)) {
+            const values = val.map((v) => find(options, { value: v }));
+            fakeEvent.target.value = values;
+            return onSelect(fakeEvent, values);
+        }
+        onSelect(fakeEvent, find(options, { value: val }));
     };
+
+    const renderValue = (valueProps) => (
+        <input
+            {...valueProps}
+            className={classNames(styles.input, className.input)}
+            name={name}
+        />
+    );
 
     return (
         <div className={classNames(styles.selectWrapper, className.wrapper)}>
@@ -20,9 +34,9 @@ const SelectComponent = (props) => {
             <SelectSearch
                 id={id}
                 disabled={disabled}
-                name={name}
                 search={search}
                 options={options}
+                renderValue={renderValue}
                 multiple={multiple}
                 onChange={onChange}
                 placeholder={placeholder}
@@ -39,6 +53,7 @@ SelectComponent.propTypes = {
     disabled: PropTypes.bool,
     className: PropTypes.shape({
         wrapper: PropTypes.string,
+        input: PropTypes.string,
     }),
     defaultValue: PropTypes.oneOfType([
         PropTypes.shape({ name: PropTypes.string, value: PropTypes.string }),

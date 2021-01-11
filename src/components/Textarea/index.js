@@ -9,11 +9,12 @@ const Textarea = (props) => {
     const { placeholder, error } = props;
 
     const [inputValue, setTextareaValue] = useState(value);
+
     const onChangeHandler = (event) => {
         const { value: inputVal } = event.target;
 
         setTextareaValue(inputVal);
-        onChange(inputVal);
+        onChange(event, inputVal);
     };
 
     return (
