@@ -1,26 +1,38 @@
 @import "styles/functions";
 
+$animation-offset: 40;
+
 .content {
+    padding: setUnit(10);
+
+    &.vertical {
+
+    }
+
     &.fadeIn {
         opacity: 0;
     }
 
     &.slideInBottom {
         position: relative;
-        top: setUnit(40);
+        top: setUnit($animation-offset);
         opacity: 0;
     }
 
     &.slideInLeft {
         position: relative;
-        left: setUnit(-40);
+        left: setUnit(-$animation-offset);
         opacity: 0;
     }
 
     &.slideInRight {
-        position: absolute;
-        left: setUnit(40);
+        position: relative;
+        left: setUnit($animation-offset);
         opacity: 0;
+
+        &.horizontal {
+            width: calc(100% - #{setUnit($animation-offset)});
+        }
     }
 
     &.active {
@@ -90,5 +102,15 @@
     to {
         opacity: 1;
         left: 0;
+    }
+}
+
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        top: 0;
     }
 }
