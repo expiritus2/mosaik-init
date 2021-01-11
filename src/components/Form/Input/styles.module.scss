@@ -4,4 +4,8 @@
     @include input;
 
     width: 100%;
+
+    .error {
+        @include inputError;
+    }
 }

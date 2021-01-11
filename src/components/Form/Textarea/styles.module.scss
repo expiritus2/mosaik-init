@@ -6,4 +6,8 @@
     .inputField {
         resize: none;
     }
+
+    .error {
+        @include inputError;
+    }
 }
