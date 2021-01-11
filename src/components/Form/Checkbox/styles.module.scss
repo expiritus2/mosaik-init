@@ -1,0 +1,54 @@
+@import "styles/functions";
+@import "styles/variables";
+@import "styles/mixins";
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: setUnit(10);
+
+    .label {
+        @include label;
+    }
+
+    &.right {
+        flex-direction: row-reverse;
+    }
+}
+
+.checkbox {
+    position: absolute;
+    left: -10000px;
+    display: none;
+
+    &+.customCheckboxWrapper {
+        position: relative;
+
+        .customCheckbox {
+            width: setUnit(15);
+            height: setUnit(15);
+            border: 1px solid darken($grey-color, 20);
+            border-radius: setUnit(3);
+        }
+
+        .checkmark {
+            display: none;
+        }
+    }
+
+    &:checked {
+        &+.customCheckboxWrapper {
+            .checkmark {
+                position: absolute;
+                top: setUnit(1);
+                left: setUnit(1);
+                display: block;
+                width: setUnit(13);
+                height: setUnit(12);
+                fill: darken($grey-color, 50);
+            }
+        }
+    }
+}

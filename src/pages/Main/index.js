@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { Logger } from 'helpers';
 
-import { Button, Select, DatePicker, Input, Textarea } from 'components';
+import { Button, Select, DatePicker, Input, Textarea, Checkbox } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -22,6 +22,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
             date: moment().valueOf(),
             input: '',
             textarea: '',
+            checkbox: false,
         },
         onSubmit,
     });
@@ -64,6 +65,12 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     placeholder="Text area input"
                     onChange={formik.handleChange}
                     value={formik.values.textarea}
+                />
+                <Checkbox
+                    name="checkbox"
+                    label="Test checkbox"
+                    onChange={formik.handleChange}
+                    checked={formik.values.checkbox}
                 />
                 <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>

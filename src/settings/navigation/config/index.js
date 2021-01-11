@@ -1,6 +1,6 @@
+import { NotFound } from 'pages';
 import commonRoutesConfig from './common';
 import protectedRoutesConfig from './protected';
-import { NotFound } from '../../../pages';
 
 const allRoutes = [
     ...commonRoutesConfig,

@@ -1,12 +1,17 @@
 @import "styles/variables";
 @import "styles/functions";
 
+@mixin label() {
+    font-size: setUnit(16);
+}
+
 @mixin input() {
     margin: setUnit(15) 0;
 
     label {
+        @include label;
+
         display: block;
-        font-size: setUnit(16);
         margin-bottom: setUnit(5);
     }
 
