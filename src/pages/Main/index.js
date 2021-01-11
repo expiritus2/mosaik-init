@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { Logger } from 'helpers';
 
-import { Button, Select, DatePicker, Input, Textarea, Checkbox } from 'components';
+import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -31,6 +31,12 @@ const Main = ({ loadInner, logout, loadPins }) => {
         { value: 'chocolate', name: 'Chocolate' },
         { value: 'strawberry', name: 'Strawberry' },
         { value: 'vanilla', name: 'Vanilla' },
+    ];
+
+    const tabs = [
+        { label: 'Posts', Component: Posts },
+        { label: 'Other', Component: () => <div>Other Component</div> },
+        { label: 'Other2', Component: () => <div>Other Component2</div> },
     ];
 
     return (
@@ -74,7 +80,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
                 />
                 <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>
-            <Posts className={styles.container} />
+            <Tabs tabs={tabs} />
         </div>
     );
 };

@@ -8,3 +8,4 @@ export { default as DatePicker } from './Form/DatePicker';
 export { default as Input } from './Form/Input';
 export { default as Textarea } from './Form/Textarea';
 export { default as Checkbox } from './Form/Checkbox';
+export { default as Tabs } from './Tabs';

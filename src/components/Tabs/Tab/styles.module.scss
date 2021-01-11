@@ -1,0 +1,13 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.tab {
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    margin-right: setUnit(15);
+
+    &.active {
+        border-color: lighten(#000, 5);
+        font-weight: bold;
+    }
+}
