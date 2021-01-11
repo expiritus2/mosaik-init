@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlatPickr from 'react-flatpickr';
-import moment from 'moment';
 import classNames from 'classnames';
 import { FiCalendar } from 'react-icons/fi';
 
@@ -9,7 +8,7 @@ import styles from './styles.module.scss';
 import './styles.scss';
 
 const DatePicker = (props) => {
-    const { id, name, date, onChange, className, options, label } = props;
+    const { id, name, value, onChange, className, options, label } = props;
     const { placeholder, disabled, error } = props;
 
     const onChangeHandler = (newDate) => {
@@ -26,7 +25,7 @@ const DatePicker = (props) => {
                 name={name}
                 disabled={disabled}
                 className={styles.inputField}
-                value={moment(date).valueOf()}
+                value={value}
                 onChange={onChangeHandler}
                 options={{
                     enableTime: true,
@@ -45,7 +44,7 @@ DatePicker.propTypes = {
     disabled: PropTypes.bool,
     label: PropTypes.string,
     className: PropTypes.string,
-    date: PropTypes.oneOfType([
+    value: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.instanceOf(Date),
         PropTypes.arrayOf(PropTypes.number),
@@ -61,7 +60,7 @@ DatePicker.defaultProps = {
     name: undefined,
     label: undefined,
     className: '',
-    date: undefined,
+    value: undefined,
     onChange: () => {},
     options: {},
     placeholder: undefined,

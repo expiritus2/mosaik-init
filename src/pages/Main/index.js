@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
+import moment from 'moment';
 
 import { Button, Select, DatePicker, Input, Textarea } from 'components';
 
@@ -17,7 +18,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
     const formik = useFormik({
         initialValues: {
             select: '',
-            date: [],
+            date: moment().valueOf(),
             input: '',
             textarea: '',
         },
@@ -41,23 +42,27 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     options={options}
                     label="Select label"
                     onSelect={formik.handleChange}
+                    value={formik.values.select}
                 />
                 <DatePicker
                     name="date"
                     label="Date label"
                     onChange={formik.handleChange}
+                    value={formik.values.date}
                 />
                 <Input
                     name="input"
                     label="Test input label"
                     placeholder="Input text"
                     onChange={formik.handleChange}
+                    value={formik.values.input}
                 />
                 <Textarea
                     name="textarea"
                     label="Test textarea label"
                     placeholder="Text area input"
                     onChange={formik.handleChange}
+                    value={formik.values.textarea}
                 />
                 <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>

@@ -11,13 +11,16 @@ const SelectComponent = (props) => {
     const { name, search, multiple, placeholder, value, disabled, error } = props;
 
     const onChange = (val) => {
-        const fakeEvent = { target: { value: val, name } };
+        const valueObj = find(options, { value: val });
+        const fakeEvent = { target: { value: valueObj, name } };
+
         if (Array.isArray(val)) {
             const values = val.map((v) => find(options, { value: v }));
             fakeEvent.target.value = values;
             return onSelect(fakeEvent, values);
         }
-        onSelect(fakeEvent, find(options, { value: val }));
+
+        onSelect(fakeEvent, valueObj);
     };
 
     const renderValue = (valueProps) => (
