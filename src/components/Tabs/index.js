@@ -4,28 +4,30 @@ import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { getQuery, setQuery } from 'helpers';
+
 import Tab from './Tab';
 import Content from './Content';
 
 import styles from './styles.module.scss';
 
 const Tabs = (props) => {
-    const { tabs, animation, enableUrlParams, activeTabIndex, wrapperClassName, direction, ...rest } = props;
-    const { location, history } = rest;
+    const { tabs, animation, enableQueryParams, activeTabIndex, wrapperClassName, direction, ...rest } = props;
+    const { queryParamName, ...passedProps } = rest;
+    const { location, history } = passedProps;
 
-    const [activeTab, setActiveTab] = useState(enableUrlParams
-        ? (getQuery(location).activeTab || activeTabIndex)
+    const [activeTab, setActiveTab] = useState(enableQueryParams
+        ? (getQuery(location)[queryParamName] || activeTabIndex)
         : activeTabIndex);
 
     const onClick = (index) => (
-        enableUrlParams
-            ? history.replace(setQuery(location, { activeTab: index + 1 }))
+        enableQueryParams
+            ? history.replace(setQuery(location, { [queryParamName]: index + 1 }))
             : setActiveTab(index)
     );
 
     const getIsActiveTab = (index) => {
-        if (enableUrlParams) {
-            const queryActiveTab = getQuery(location).activeTab;
+        if (enableQueryParams) {
+            const queryActiveTab = getQuery(location)[queryParamName];
             return (queryActiveTab ? queryActiveTab - 1 : activeTabIndex) === index;
         }
 
@@ -44,7 +46,7 @@ const Tabs = (props) => {
 
     const renderContent = () => tabs.map(({ label, Component }, index) => (
         <Content key={label} animation={animation} isActive={getIsActiveTab(index)} direction={direction}>
-            <Component {...rest} />
+            <Component {...passedProps} />
         </Content>
     ));
 
@@ -72,17 +74,19 @@ Tabs.propTypes = {
         Component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     })).isRequired,
     animation: PropTypes.string,
-    enableUrlParams: PropTypes.bool,
+    enableQueryParams: PropTypes.bool,
     activeTabIndex: PropTypes.number,
     direction: PropTypes.string,
+    queryParamName: PropTypes.string,
 };
 
 Tabs.defaultProps = {
     wrapperClassName: '',
     animation: Tabs.SLIDE_IN_RIGHT,
-    enableUrlParams: false,
+    enableQueryParams: false,
     activeTabIndex: 0,
     direction: Tabs.DIRECTION_HORIZONTAL,
+    queryParamName: 'activeTab',
 };
 
 export default withRouter(Tabs);
