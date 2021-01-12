@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { Logger } from 'helpers';
 
-import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs } from 'components';
+import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs, ButtonGroup } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -37,6 +37,13 @@ const Main = ({ loadInner, logout, loadPins }) => {
         { label: 'Posts', Component: Posts },
         { label: 'Other', Component: () => <div>Other Component</div> },
         { label: 'Other2', Component: () => <div>Other Component2</div> },
+    ];
+
+    const buttons = [
+        { id: 'any', label: 'Any' },
+        { id: 'button2', label: 'Button2' },
+        { id: 'button3', label: 'Button3' },
+        { id: 'button4', label: 'Button4' },
     ];
 
     return (
@@ -77,6 +84,10 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     label="Test checkbox"
                     onChange={formik.handleChange}
                     checked={formik.values.checkbox}
+                />
+                <ButtonGroup
+                    buttons={buttons}
+                    onChange={(values) => Logger.log(values)}
                 />
                 <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>
