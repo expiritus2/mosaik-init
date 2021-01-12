@@ -51,7 +51,7 @@ const Tabs = (props) => {
     return (
         <div className={classNames(styles.wrapper, styles[direction], wrapperClassName)}>
             <div className={classNames(styles.tabs)}>{renderTabs()}</div>
-            {renderContent()}
+            <div className={styles.contentWrapper}>{renderContent()}</div>
         </div>
     );
 };
