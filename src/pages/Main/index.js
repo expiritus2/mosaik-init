@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import moment from 'moment';
 import { Logger } from 'helpers';
 
 import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs, ButtonGroup } from 'components';
@@ -18,8 +17,8 @@ const Main = ({ loadInner, logout, loadPins }) => {
 
     const formik = useFormik({
         initialValues: {
-            select: '',
-            date: moment().valueOf(),
+            select: {},
+            date: [new Date()],
             input: '',
             textarea: '',
             checkbox: false,
@@ -52,12 +51,12 @@ const Main = ({ loadInner, logout, loadPins }) => {
             <Button title="Click me" onClick={() => loadInner()} />
             <Button title="Logout" onClick={() => logout()} />
             <Button title="Load Pins" onClick={() => loadPins()} />
-            <form onSubmit={formik.handleSubmit} className={styles.form}>
+            <form className={styles.form}>
                 <Select
                     name="select"
                     options={options}
                     label="Select label"
-                    onSelect={formik.handleChange}
+                    onSelect={(event, value) => formik.setFieldValue('select', value)}
                     value={formik.values.select}
                 />
                 <DatePicker
@@ -91,7 +90,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     buttons={buttons}
                     onChange={(values) => formik.setFieldValue('buttonGroup', values)}
                 />
-                <Button type={Button.TYPE_SUBMIT} title="Submit" />
+                <Button onClick={() => onSubmit(formik.values)} title="Submit" />
             </form>
             <Tabs tabs={tabs} />
         </div>
