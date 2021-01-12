@@ -2,4 +2,8 @@
 
 .form {
     width: setUnit(200);
+
+    .buttonGroup {
+        margin-bottom: setUnit(10);
+    }
 }

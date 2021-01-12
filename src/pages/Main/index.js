@@ -23,6 +23,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
             input: '',
             textarea: '',
             checkbox: false,
+            buttonGroup: [],
         },
         onSubmit,
     });
@@ -86,8 +87,9 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     checked={formik.values.checkbox}
                 />
                 <ButtonGroup
+                    className={styles.buttonGroup}
                     buttons={buttons}
-                    onChange={(values) => Logger.log(values)}
+                    onChange={(values) => formik.setFieldValue('buttonGroup', values)}
                 />
                 <Button type={Button.TYPE_SUBMIT} title="Submit" />
             </form>

@@ -9,31 +9,30 @@ import styles from './styles.module.scss';
 
 const ButtonGroup = (props) => {
     const { buttons, multiple, activeBtns, onChange } = props;
-    const { className, buttonClassName } = props;
+    const { className, buttonClassName, disabled } = props;
     const [activeButtons, setActiveButtons] = useState(activeBtns);
 
     const pushOrRemove = (id) => (
         activeButtons.includes(id)
             ? filter(activeButtons, (activeId) => activeId !== id)
-            : [...activeButtons, id]
+            : [...(multiple ? activeButtons : []), id]
     );
 
     const onClick = (id) => {
-        if (multiple) {
-            const newActives = pushOrRemove(id);
-            setActiveButtons(newActives);
-            return onChange(newActives);
-        }
+        if (disabled) return null;
 
-        setActiveButtons([id]);
-        return onChange([id]);
+        const newActives = pushOrRemove(id);
+
+        setActiveButtons(newActives);
+        onChange(newActives);
     };
 
     return (
-        <div className={classNames(styles.buttons, className)}>
+        <div className={classNames(styles.buttons, { [styles.disabled]: disabled }, className)}>
             {buttons.map(({ id, label }) => (
                 <Button
                     key={id}
+                    disabled={disabled}
                     label={label}
                     onClick={() => onClick(id)}
                     active={activeButtons.includes(id)}
@@ -57,6 +56,7 @@ ButtonGroup.propTypes = {
         button: PropTypes.string,
         buttonActive: PropTypes.string,
     }),
+    disabled: PropTypes.bool,
 };
 
 ButtonGroup.defaultProps = {
@@ -65,6 +65,7 @@ ButtonGroup.defaultProps = {
     activeBtns: [],
     onChange: () => {},
     buttonClassName: {},
+    disabled: false,
 };
 
 export default ButtonGroup;

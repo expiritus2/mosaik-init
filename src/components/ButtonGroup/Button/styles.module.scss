@@ -12,6 +12,10 @@
     padding: setUnit(5) 0;
     border-right: none;
 
+    &.disabled {
+        cursor: not-allowed;
+    }
+
     &:first-child {
         border-top-left-radius: $border-radius;
         border-bottom-left-radius: $border-radius;

@@ -4,12 +4,13 @@ import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-const Button = ({ label, onClick, active, className }) => (
+const Button = ({ label, onClick, active, className, disabled }) => (
     <button
         className={classNames(
             styles.button,
-            { [className.buttonActive || styles.active]: active },
             className.button,
+            { [className.buttonActive || styles.active]: active },
+            { [styles.disabled]: disabled },
         )}
         type="button"
         onClick={onClick}
@@ -26,11 +27,13 @@ Button.propTypes = {
     label: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     active: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
     className: {},
     active: false,
+    disabled: false,
 };
 
 export default Button;
