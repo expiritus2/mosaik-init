@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import { Logger } from 'helpers';
+import { Logger } from 'services';
 
 import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs, ButtonGroup } from 'components';
 
@@ -92,7 +92,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
                 />
                 <Button onClick={() => onSubmit(formik.values)} title="Submit" />
             </form>
-            <Tabs tabs={tabs} />
+            <Tabs enableQueryParams tabs={tabs} />
         </div>
     );
 };
