@@ -3,35 +3,35 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { UrlService } from 'services';
+import { LocationService } from 'services';
 
 import Tab from './Tab';
 import Content from './Content';
 
 import styles from './styles.module.scss';
 
-const urlSrv = new UrlService();
+const locationSrv = new LocationService();
 
 const Tabs = (props) => {
     const { tabs, animation, enableQueryParams, activeTabIndex, wrapperClassName, direction, ...rest } = props;
     const { queryParamName, ...passedProps } = rest;
     const { location, history } = passedProps;
 
-    urlSrv.setLocation(location);
+    locationSrv.setLocation(location);
 
     const [activeTab, setActiveTab] = useState(enableQueryParams
-        ? (urlSrv.getQuery()[queryParamName] || activeTabIndex)
+        ? (locationSrv.getQuery()[queryParamName] || activeTabIndex)
         : activeTabIndex);
 
     const onClick = (index) => (
         enableQueryParams
-            ? history.replace(urlSrv.setQuery({ [queryParamName]: index + 1 }))
+            ? history.replace(locationSrv.setQuery({ [queryParamName]: index + 1 }))
             : setActiveTab(index)
     );
 
     const getIsActiveTab = (index) => {
         if (enableQueryParams) {
-            const queryActiveTab = urlSrv.getQuery(location)[queryParamName];
+            const queryActiveTab = locationSrv.getQuery(location)[queryParamName];
             return (queryActiveTab ? queryActiveTab - 1 : activeTabIndex) === index;
         }
 

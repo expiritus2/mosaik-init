@@ -1,2 +1,2 @@
-export * from './url';
+export * from './location';
 export * from './logger';

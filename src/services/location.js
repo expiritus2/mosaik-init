@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-export class UrlService {
+export class LocationService {
     /**
      *
      * @param location - location object
@@ -30,7 +30,7 @@ export class UrlService {
     /**
      *
      * @param params - object with params to set to query string
-     * @param options - rules for parsing or stringifying query params
+     * @param options - rules for parsing existing or stringifying new query params
      * @returns {string} - url with query params
      */
     setQuery(params, options = {}) {
@@ -44,7 +44,7 @@ export class UrlService {
      * @param options - rules for parsing or stringifying query params
      * @returns {string} - string in query/search format ? is ignored
      */
-    prepareSearch(params, options) {
+    prepareSearch(params, options = {}) {
         const search = this.getQuery(options);
         return queryString.stringify({ ...search, ...params }, { sort: false, ...options });
     }

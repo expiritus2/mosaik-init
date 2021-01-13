@@ -92,7 +92,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
                 />
                 <Button onClick={() => onSubmit(formik.values)} title="Submit" />
             </form>
-            <Tabs enableQueryParams tabs={tabs} />
+            <Tabs enableQueryParams queryParamName="testActiveTab" tabs={tabs} />
         </div>
     );
 };
