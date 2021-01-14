@@ -9,6 +9,10 @@
         border-width: 1px;
         border-radius: setUnit(5);
     }
+
+    .error {
+        @include inputError;
+    }
 }
 
 .container {

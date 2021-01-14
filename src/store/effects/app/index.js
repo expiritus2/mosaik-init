@@ -1,7 +1,7 @@
 import Api from 'store/effects/core/api';
 import { getTestData, getPins } from 'api/app';
 import { requestGetTestAction, appLogoutAction, getTestPinsAction, appInitAction } from 'store/actions/app';
-import { isAuthData } from 'services/auth';
+import { Auth } from 'services';
 
 export const appLoadEffect = Api.execBase({ action: requestGetTestAction, method: getTestData });
 
@@ -11,7 +11,7 @@ export const appLogoutEffect = () => async (dispatch) => {
 };
 
 export const appInitEffect = () => async (dispatch) => {
-    const areTokens = await isAuthData();
+    const areTokens = await Auth.isAuthData();
 
     if (!areTokens) {
         dispatch(appInitAction({ auth: false }));

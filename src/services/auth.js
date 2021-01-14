@@ -1,24 +1,35 @@
 import { ACCESS_TOKEN, ID_TOKEN } from 'settings/constants/localStorage';
 import { getItems, setItems, removeItems } from 'helpers/localStorage';
 
-const AUTH_DATA_KEYS = [ACCESS_TOKEN, ID_TOKEN];
+export class Auth {
+    static authDataKeys = [ACCESS_TOKEN, ID_TOKEN];
 
-export const getAuthData = () => {
-    const items = getItems(AUTH_DATA_KEYS);
-    return items;
-};
+    /**
+     * @returns {object} with tokens
+     */
+    static getAuthData = () => {
+        const items = getItems(this.authDataKeys);
+        return items;
+    }
 
-export const isAuthData = () => {
-    const items = getItems(AUTH_DATA_KEYS);
-    return Promise.resolve(!!(items[ACCESS_TOKEN] && items[ID_TOKEN]));
-};
+    /**
+     * @returns {boolean}
+     */
+    static isAuthData = () => {
+        const items = getItems(this.authDataKeys);
+        return Promise.resolve(!!(items[ACCESS_TOKEN] && items[ID_TOKEN]));
+    }
 
-export const setAuthData = (data) => {
-    setItems(data);
-    return Promise.resolve();
-};
+    /**
+     * @param  {object} data - Object of key-value to set in LocalStorage
+     */
+    static setAuthData = (data) => {
+        setItems(data);
+        return Promise.resolve();
+    }
 
-export const clearAuthData = () => {
-    removeItems(AUTH_DATA_KEYS);
-    return Promise.resolve();
-};
+    static clearAuthData = () => {
+        removeItems(this.authDataKeys);
+        return Promise.resolve();
+    }
+}

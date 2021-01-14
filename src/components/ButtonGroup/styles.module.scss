@@ -1,0 +1,7 @@
+.buttons {
+    white-space: nowrap;
+
+    &.disabled {
+        opacity: .5;
+    }
+}

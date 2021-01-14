@@ -41,6 +41,7 @@ const Input = (props) => {
 
 Input.TYPE_TEXT = 'text';
 Input.TYPE_NUMBER = 'number';
+Input.TYPE_SEARCH = 'search';
 
 Input.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import moment from 'moment';
-import { Logger } from 'helpers';
+import { Logger } from 'services';
 
-import { Button, Select, DatePicker, Input, Textarea } from 'components';
+import { Button, Select, DatePicker, Input, Textarea, Checkbox, Tabs, ButtonGroup } from 'components';
 
 import connect from './connect';
 import Posts from './Posts';
@@ -18,10 +17,12 @@ const Main = ({ loadInner, logout, loadPins }) => {
 
     const formik = useFormik({
         initialValues: {
-            select: '',
-            date: moment().valueOf(),
+            select: {},
+            date: [new Date()],
             input: '',
             textarea: '',
+            checkbox: false,
+            buttonGroup: [],
         },
         onSubmit,
     });
@@ -32,17 +33,30 @@ const Main = ({ loadInner, logout, loadPins }) => {
         { value: 'vanilla', name: 'Vanilla' },
     ];
 
+    const tabs = [
+        { label: 'Posts', Component: Posts },
+        { label: 'Other', Component: () => <div>Other Component</div> },
+        { label: 'Other2', Component: () => <div>Other Component2</div> },
+    ];
+
+    const buttons = [
+        { id: 'any', label: 'Any' },
+        { id: 'button2', label: 'Button2' },
+        { id: 'button3', label: 'Button3' },
+        { id: 'button4', label: 'Button4' },
+    ];
+
     return (
         <div>
             <Button title="Click me" onClick={() => loadInner()} />
             <Button title="Logout" onClick={() => logout()} />
             <Button title="Load Pins" onClick={() => loadPins()} />
-            <form onSubmit={formik.handleSubmit} className={styles.form}>
+            <form className={styles.form}>
                 <Select
                     name="select"
                     options={options}
                     label="Select label"
-                    onSelect={formik.handleChange}
+                    onSelect={(event, value) => formik.setFieldValue('select', value)}
                     value={formik.values.select}
                 />
                 <DatePicker
@@ -65,9 +79,20 @@ const Main = ({ loadInner, logout, loadPins }) => {
                     onChange={formik.handleChange}
                     value={formik.values.textarea}
                 />
-                <Button type={Button.TYPE_SUBMIT} title="Submit" />
+                <Checkbox
+                    name="checkbox"
+                    label="Test checkbox"
+                    onChange={formik.handleChange}
+                    checked={formik.values.checkbox}
+                />
+                <ButtonGroup
+                    className={styles.buttonGroup}
+                    buttons={buttons}
+                    onChange={(values) => formik.setFieldValue('buttonGroup', values)}
+                />
+                <Button onClick={() => onSubmit(formik.values)} title="Submit" />
             </form>
-            <Posts className={styles.container} />
+            <Tabs enableQueryParams queryParamName="testActiveTab" tabs={tabs} />
         </div>
     );
 };

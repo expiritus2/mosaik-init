@@ -7,8 +7,9 @@ import classNames from 'classnames';
 import styles from './syles.module.scss';
 
 const SelectComponent = (props) => {
-    const { id, defaultValue, onSelect, options, label, className } = props;
+    const { id, defaultValue, onSelect, options, label, className, closeOnSelect } = props;
     const { name, search, multiple, placeholder, value, disabled, error } = props;
+    const { printOptions } = props;
 
     const onChange = (val) => {
         const valueObj = find(options, { value: val });
@@ -28,14 +29,27 @@ const SelectComponent = (props) => {
             {...valueProps}
             className={classNames(styles.input, className.input)}
             name={name}
+            autoComplete="off"
         />
     );
+
+    const getValue = () => {
+        if (Array.isArray(value)) {
+            const defVal = typeof value === 'object' ? '' : value;
+            return value.map((val) => get(val, 'value', defVal));
+        }
+
+        const defVal = typeof value === 'object' ? '' : value;
+        return get(value, 'value', defVal) || get(defaultValue, 'value', defaultValue);
+    };
 
     return (
         <div className={classNames(styles.selectWrapper, className.wrapper)}>
             {label && <label htmlFor={id}>{label}</label>}
             <SelectSearch
                 id={id}
+                printOptions={printOptions}
+                closeOnSelect={closeOnSelect}
                 disabled={disabled}
                 search={search}
                 options={options}
@@ -44,7 +58,7 @@ const SelectComponent = (props) => {
                 onChange={onChange}
                 placeholder={placeholder}
                 className={(key) => classNames(styles[key], className[key])}
-                value={get(value, 'value', value) || get(defaultValue, 'value', defaultValue)}
+                value={getValue()}
             />
             {error && <div className={styles.error}>{error}</div>}
         </div>
@@ -71,9 +85,21 @@ SelectComponent.propTypes = {
     search: PropTypes.bool,
     multiple: PropTypes.bool,
     placeholder: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            name: PropTypes.string,
+            value: PropTypes.string,
+        }),
+        PropTypes.arrayOf(PropTypes.shape({
+            name: PropTypes.string,
+            value: PropTypes.string,
+        })),
+    ]),
     label: PropTypes.string,
     error: PropTypes.string,
+    closeOnSelect: PropTypes.bool,
+    printOptions: PropTypes.string,
 };
 
 SelectComponent.defaultProps = {
@@ -91,6 +117,8 @@ SelectComponent.defaultProps = {
     label: undefined,
     disabled: undefined,
     error: undefined,
+    closeOnSelect: true,
+    printOptions: 'on-focus',
 };
 
 export default SelectComponent;

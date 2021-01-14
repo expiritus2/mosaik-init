@@ -1,9 +1,9 @@
 @import "styles/functions";
 
-.container {
-    height: 100vh;
-}
-
 .form {
     width: setUnit(200);
+
+    .buttonGroup {
+        margin-bottom: setUnit(10);
+    }
 }

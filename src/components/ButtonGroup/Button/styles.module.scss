@@ -1,0 +1,34 @@
+@import "styles/variables";
+@import "styles/functions";
+
+.button {
+    $border-radius: setUnit(5);
+
+    border: 1px solid $grey-color;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    min-width: setUnit(70);
+    padding: setUnit(5) 0;
+    border-right: none;
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+
+    &:first-child {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-child {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+        border-right: 1px solid $grey-color;
+    }
+
+    &.active {
+        background: #FEF4F3;
+        border-color: #FEF4F3;
+    }
+}
