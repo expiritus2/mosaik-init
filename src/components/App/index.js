@@ -6,6 +6,7 @@ import { useResize } from 'hooks';
 import ScreenContext from 'contexts/screen';
 
 import { AppRouter } from 'components';
+import MenuDrawer from './MenuDrawer';
 
 import connect from './connect';
 
@@ -25,6 +26,7 @@ const App = ({ appInit, isUser, auth }) => {
             <Router>
                 <AppRouter />
             </Router>
+            <MenuDrawer />
         </ScreenContext.Provider>
     );
 };

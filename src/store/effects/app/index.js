@@ -1,6 +1,14 @@
 import Api from 'store/effects/core/api';
 import { getTestData, getPins } from 'api/app';
-import { requestGetTestAction, appLogoutAction, getTestPinsAction, appInitAction } from 'store/actions/app';
+import {
+    requestGetTestAction,
+    appLogoutAction,
+    getTestPinsAction,
+    appInitAction,
+    appOpenSearchDrawerAction,
+    appOpenMenuDrawerAction,
+} from 'store/actions/app';
+
 import { Auth } from 'services';
 
 export const appLoadEffect = Api.execBase({ action: requestGetTestAction, method: getTestData });
@@ -22,6 +30,14 @@ export const appInitEffect = () => async (dispatch) => {
 
     // TODO: redirect on login page if 401
     dispatch(appInitAction({ auth: true }));
+};
+
+export const openSearchDrawerEffect = ({ isOpen }) => (dispatch) => {
+    dispatch(appOpenSearchDrawerAction({ isOpen }));
+};
+
+export const openMenuDrawerEffect = ({ isOpen }) => (dispatch) => {
+    dispatch(appOpenMenuDrawerAction({ isOpen }));
 };
 
 export const loadPinsEffect = Api.execBase({ action: getTestPinsAction, method: getPins });

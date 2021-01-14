@@ -2,10 +2,18 @@ import { handleActions } from 'redux-actions';
 import { IDLE } from 'settings/constants/api-state';
 import { getDataFor } from 'store/helpers';
 
-import { requestGetTestAction, appLogoutAction, appInitAction } from 'store/actions/app';
+import {
+    requestGetTestAction,
+    appLogoutAction,
+    appInitAction,
+    appOpenSearchDrawerAction,
+    appOpenMenuDrawerAction,
+} from 'store/actions/app';
 
 const initialData = {
     auth: null,
+    isSearchDrawerOpen: false,
+    isMenuDrawerOpen: false,
     state: IDLE,
     data: null,
     meta: {},
@@ -23,4 +31,12 @@ export default handleActions({
         meta: getDataFor('meta', payload, initialData),
     }),
     [appLogoutAction]: () => initialData,
+    [appOpenSearchDrawerAction]: (state, { payload }) => ({
+        ...state,
+        isSearchDrawerOpen: payload.isOpen,
+    }),
+    [appOpenMenuDrawerAction]: (state, { payload }) => ({
+        ...state,
+        isMenuDrawerOpen: payload.isOpen,
+    }),
 }, initialData);
