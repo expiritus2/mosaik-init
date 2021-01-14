@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { IDLE } from 'settings/constants/api-state';
+import { IDLE } from 'settings/constants/apiState';
 import { getDataFor } from 'store/helpers';
 
 import {

@@ -1,4 +1,4 @@
-import { PENDING, READY, ERROR } from 'settings/constants/api-state';
+import { PENDING, READY, ERROR } from 'settings/constants/apiState';
 
 export default class Api {
     /**
