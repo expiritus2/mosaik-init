@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 
-import { appLogoutEffect, appLoadEffect, loadPinsEffect, openSearchDrawerEffect, openMenuDrawerEffect } from 'store/effects/app';
+import { logoutEffect } from 'store/effects/user';
 
 const mapDispatchToProps = {
-    loadInner: appLoadEffect,
-    logout: appLogoutEffect,
-    loadPins: loadPinsEffect,
-    openSearchDrawer: openSearchDrawerEffect,
-    openMenuDrawer: openMenuDrawerEffect,
+    logout: logoutEffect,
 };
 
 export default connect(null, mapDispatchToProps);

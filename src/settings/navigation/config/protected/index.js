@@ -1,6 +1,6 @@
+import React from 'react';
 import { routes } from 'settings/navigation/routes';
 import { BROKERAGE_ADMIN, SUPER_USER } from 'settings/constants/roles';
-import React from 'react';
 
 export default [
     {

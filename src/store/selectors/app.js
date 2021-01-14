@@ -1,24 +1,4 @@
-import { createSelector } from 'reselect';
-import { PENDING, ERROR } from 'settings/constants/apiState';
-
-const localState = ({ app }) => app;
-
-export const isPendingPostsSelector = createSelector(
-    localState,
-    ({ state }) => state === PENDING,
-);
-
-export const isErrorLoadingPostsSelector = createSelector(
-    localState,
-    ({ state }) => state === ERROR,
-);
-
-export const getPostsSelector = createSelector(
-    localState,
-    ({ data }) => data?.posts || [],
-);
-
-export const isAuth = createSelector(
-    localState,
-    ({ auth }) => !!auth,
-);
+// import { createSelector } from 'reselect';
+// import { PENDING, ERROR } from 'settings/constants/apiState';
+//
+// const localState = ({ app }) => app;
