@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { HashRouter as Router } from 'react-router-dom';
-import { Logger } from 'services';
 
 import { useResize } from 'hooks';
 import ScreenContext from 'contexts/screen';
@@ -12,25 +11,26 @@ import connect from './connect';
 
 import 'styles/global.scss';
 
-const App = ({ user }) => {
+const App = ({ initialUser, userInit }) => {
     const { screen } = useResize();
 
-    Logger.log(user);
+    useEffect(() => userInit(initialUser), [userInit, initialUser]);
+
     return (
         <ScreenContext.Provider value={{ screen }}>
             <Router>
-                <AppRouter />
+                <AppRouter initialUser={initialUser} />
             </Router>
         </ScreenContext.Provider>
     );
 };
 
 App.propTypes = {
-    user: PropTypes.shape({}),
-};
-
-App.defaultProps = {
-    user: {},
+    initialUser: PropTypes.shape({
+        data: PropTypes.shape({}),
+        err: PropTypes.shape({}),
+    }).isRequired,
+    userInit: PropTypes.func.isRequired,
 };
 
 export default connect(App);

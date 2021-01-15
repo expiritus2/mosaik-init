@@ -2,7 +2,7 @@ import { NotFound } from 'pages';
 import commonRoutesConfig from './common';
 import protectedRoutesConfig from './protected';
 
-const allRoutes = [
+export const allRoutes = [
     ...commonRoutesConfig,
     ...protectedRoutesConfig,
     { path: '*', component: NotFound },
