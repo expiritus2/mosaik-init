@@ -11,4 +11,4 @@ export const logoutEffect = (cfg = {}) => (dispatch) => {
     history?.push('/');
 };
 
-export const userInitEffect = Api.execResult({ action: initUserAction, method: getCurrentUser });
+export const userInitEffect = Api.execBase({ action: initUserAction, method: getCurrentUser });

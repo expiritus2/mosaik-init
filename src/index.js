@@ -6,15 +6,18 @@ import { App } from 'components';
 
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import { getCurrentUser } from './api/user';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById('root'),
-);
+getCurrentUser().then((response) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <Provider store={store}>
+                <App user={response.data} />
+            </Provider>
+        </React.StrictMode>,
+        document.getElementById('root'),
+    );
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

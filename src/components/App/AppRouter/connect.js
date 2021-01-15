@@ -3,7 +3,7 @@ import { userInitEffect } from 'store/effects/user';
 
 function mapStateToProps(state) {
     return {
-        userData: state.user.data,
+        userRoles: state.user.data?.roles,
         meta: state.user.meta,
         userRequestState: state.user.state,
     };

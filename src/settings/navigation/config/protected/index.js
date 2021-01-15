@@ -14,6 +14,6 @@ export default [
         path: routes.admin,
         component: () => <div>Brokerage user page</div>,
         exact: true,
-        roles: [SUPER_USER, BROKERAGE_ADMIN],
+        roles: [BROKERAGE_ADMIN],
     },
 ];
