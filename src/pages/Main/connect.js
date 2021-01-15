@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { appLogoutEffect, appLoadEffect, loadPinsEffect, openSearchDrawerEffect, openMenuDrawerEffect } from 'store/effects/app';
+import { appLogoutEffect, appLoadEffect, loadPinsEffect, openSearchDrawerEffect, openMenuDrawerEffect, appLoginEffect } from 'store/effects/app';
 
 const mapDispatchToProps = {
     loadInner: appLoadEffect,
@@ -8,6 +8,7 @@ const mapDispatchToProps = {
     loadPins: loadPinsEffect,
     openSearchDrawer: openSearchDrawerEffect,
     openMenuDrawer: openMenuDrawerEffect,
+    login: appLoginEffect,
 };
 
 export default connect(null, mapDispatchToProps);

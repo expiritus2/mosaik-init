@@ -13,12 +13,13 @@ Wrapper.propTypes = {
     className: PropTypes.string,
     spinnerClassname: PropTypes.string,
     isPending: PropTypes.bool.isRequired,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 };
 
 Wrapper.defaultProps = {
     className: '',
     spinnerClassname: '',
+    children: undefined,
 };
 
 export default Wrapper;

@@ -56,6 +56,8 @@ export default class Api {
                 if (typeof cb === 'function') {
                     cb(null, response);
                 }
+
+                return response;
             } catch (err) {
                 const config = {
                     ...cfg,
@@ -72,6 +74,7 @@ export default class Api {
                 if (showError) {
                     showErrorMessage(err);
                 }
+                throw err;
             }
         };
     }
