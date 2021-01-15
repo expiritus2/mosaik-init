@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { getUserRoles } from 'store/selectors/user';
+import { getIsAuthLoading } from 'store/selectors/app';
 
 const mapStateToProps = (state) => ({
-    userRoles: getUserRoles(state),
+    loading: getIsAuthLoading(state),
 });
 
 export default connect(mapStateToProps);

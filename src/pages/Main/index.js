@@ -10,7 +10,7 @@ import Posts from './Posts';
 
 import styles from './styles.module.scss';
 
-const Main = ({ loadInner, logout, loadPins }) => {
+const Main = ({ loadInner, logout, loadPins, login }) => {
     const onSubmit = (value) => {
         Logger.log(value);
     };
@@ -50,6 +50,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
         <div>
             <Button title="Click me" onClick={() => loadInner()} />
             <Button title="Logout" onClick={() => logout()} />
+            <Button title="Login" onClick={() => login()} />
             <Button title="Load Pins" onClick={() => loadPins()} />
             <form className={styles.form}>
                 <Select
@@ -100,6 +101,7 @@ const Main = ({ loadInner, logout, loadPins }) => {
 Main.propTypes = {
     loadInner: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     loadPins: PropTypes.func.isRequired,
 };
 

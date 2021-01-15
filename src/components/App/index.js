@@ -5,39 +5,30 @@ import PropTypes from 'prop-types';
 import { useResize } from 'hooks';
 import ScreenContext from 'contexts/screen';
 
-import { AppRouter } from 'components';
+import { AppRouter, AppLoading } from 'components';
 
 import connect from './connect';
 
 import 'styles/global.scss';
 
-const App = ({ appInit, isUser, auth }) => {
+const App = ({ appInit }) => {
     const { screen } = useResize();
 
     useEffect(appInit, [appInit]);
 
-    if (auth && !isUser) {
-        return 'loading'; // TODO: return spiner
-    }
-
     return (
         <ScreenContext.Provider value={{ screen }}>
-            <Router>
-                <AppRouter />
-            </Router>
+            <AppLoading>
+                <Router>
+                    <AppRouter />
+                </Router>
+            </AppLoading>
         </ScreenContext.Provider>
     );
 };
 
 App.propTypes = {
-    isUser: PropTypes.bool,
-    auth: PropTypes.bool,
     appInit: PropTypes.func.isRequired,
-};
-
-App.defaultProps = {
-    auth: false,
-    isUser: false,
 };
 
 export default connect(App);

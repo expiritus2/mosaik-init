@@ -10,3 +10,4 @@ export { default as Textarea } from './Form/Textarea';
 export { default as Checkbox } from './Form/Checkbox';
 export { default as Tabs } from './Tabs';
 export { default as ButtonGroup } from './ButtonGroup';
+export { default as AppLoading } from './AppLoading';
