@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { userInitEffect } from 'store/effects/user';
+import { logoutEffect } from 'store/effects/user';
 
 const mapDispatchToProps = {
-    userInit: userInitEffect,
+    logout: logoutEffect,
 };
 
 export default connect(null, mapDispatchToProps);

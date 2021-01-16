@@ -1,5 +1,7 @@
+import Api from 'store/effects/core/api';
 import { initUserAction, logoutAction } from 'store/actions/user';
 import { LocalStorage } from 'services';
+import { getCurrentUser } from 'api/user';
 
 export const logoutEffect = (cfg = {}) => (dispatch) => {
     const { history } = cfg;
@@ -9,6 +11,4 @@ export const logoutEffect = (cfg = {}) => (dispatch) => {
     history?.push('/');
 };
 
-export const userInitEffect = (user) => (dispatch) => {
-    dispatch(initUserAction(user));
-};
+export const getCurrentUserEffect = Api.execBase({ action: initUserAction, method: getCurrentUser });

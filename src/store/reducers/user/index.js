@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { initUserAction, logoutAction } from 'store/actions/user';
-import { IDLE, READY } from 'settings/constants/apiState';
+import { IDLE } from 'settings/constants/apiState';
 import { getDataFor } from 'store/helpers';
 
 const initialData = {
@@ -11,7 +11,7 @@ const initialData = {
 
 export default handleActions({
     [initUserAction]: (state, { payload }) => ({
-        state: READY,
+        state: payload.state,
         data: getDataFor('data', payload, initialData),
         meta: getDataFor('meta', payload, initialData),
     }),

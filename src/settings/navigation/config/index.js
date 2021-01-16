@@ -8,10 +8,4 @@ export const allRoutes = [
     { path: '*', component: NotFound },
 ];
 
-const navConfig = (userRoles) => (
-    allRoutes.filter(({ roles: routeRoles }) => {
-        if (!routeRoles) return true;
-        return routeRoles.some((routeRole) => userRoles.includes(routeRole));
-    }));
-
-export default navConfig;
+export default allRoutes;

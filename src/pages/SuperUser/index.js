@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import { Button } from 'components';
+import { withAuthUser } from 'hocs';
 import connect from './connect';
 
 const SuperUser = ({ logout, history }) => (
@@ -17,4 +18,4 @@ SuperUser.propTypes = {
     history: ReactRouterPropTypes.history.isRequired,
 };
 
-export default connect(SuperUser);
+export default withAuthUser(connect(SuperUser));
