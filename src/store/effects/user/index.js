@@ -1,7 +1,7 @@
 import Api from 'store/effects/core/api';
-import { initUserAction, logoutAction } from 'store/actions/user';
+import { initUserAction, logoutAction, loginAction } from 'store/actions/user';
 import { LocalStorage } from 'services';
-import { getCurrentUser } from 'api/user';
+import { getCurrentUser, login } from 'api/user';
 
 export const logoutEffect = (cfg = {}) => (dispatch) => {
     const { history } = cfg;
@@ -12,3 +12,4 @@ export const logoutEffect = (cfg = {}) => (dispatch) => {
 };
 
 export const getCurrentUserEffect = Api.execBase({ action: initUserAction, method: getCurrentUser });
+export const loginEffect = Api.execBase({ action: loginAction, method: login });

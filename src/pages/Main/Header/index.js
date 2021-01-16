@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { READY } from 'settings/constants/apiState';
+import ReactRouterPropTypes from 'react-router-prop-types';
+import { withRouter } from 'react-router-dom';
 
 import { withUserInfo } from 'hocs';
+import { Button } from 'components';
+import { routes } from 'settings/navigation/routes';
 
-import styles from './styles.module.scss';
+import connect from './connect';
 
-const Header = ({ user }) => (
-    <div className={styles.header}>
-        {user.meta.status === 401 || (user.state === READY && !user.data)
-            ? <div>Login Button</div>
-            : <div>Logout Button</div>}
+const Header = ({ isUserNotAuthorized, logout, history }) => (
+    <div>
+        {isUserNotAuthorized
+            ? <Button title="Login" onClick={() => history.push(routes.login)} />
+            : <Button title="Logout" onClick={() => logout({ history })} />}
     </div>
 );
 
 Header.propTypes = {
-    user: PropTypes.shape({
-        state: PropTypes.string,
-        data: PropTypes.shape({}),
-        meta: PropTypes.shape({
-            status: PropTypes.number,
-        }),
-    }),
+    logout: PropTypes.func.isRequired,
+    history: ReactRouterPropTypes.history.isRequired,
+    isUserNotAuthorized: PropTypes.bool.isRequired,
 };
 
-Header.defaultProps = {
-    user: {},
-};
-
-export default withUserInfo(Header);
+export default withRouter(
+    withUserInfo(
+        connect(Header),
+    ),
+);

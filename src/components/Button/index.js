@@ -16,9 +16,6 @@ const Button = ({ id, title, type, disabled, className, onClick }) => (
     </button>
 );
 
-Button.TYPE_BUTTON = 'button';
-Button.TYPE_SUBMIT = 'submit';
-
 Button.propTypes = {
     id: PropTypes.string,
     className: PropTypes.string,
@@ -31,7 +28,7 @@ Button.propTypes = {
 Button.defaultProps = {
     className: '',
     id: undefined,
-    type: Button.TYPE_BUTTON,
+    type: 'button',
     disabled: false,
     onClick: () => {},
 };

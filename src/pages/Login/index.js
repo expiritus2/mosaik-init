@@ -1,9 +1,65 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
+import { useFormik } from 'formik';
 
-const Login = () => (
-    <div>
-        Login page
-    </div>
-);
+import { Logger } from 'services';
+import { Input, Button, Wrapper } from 'components';
+import { PENDING } from 'settings/constants/apiState';
+import { routes } from 'settings/navigation/routes';
 
-export default Login;
+import connect from './connect';
+
+import styles from './styles.module.scss';
+
+const Login = ({ user, login, history }) => {
+    const onSubmit = (values) => {
+        Logger.log(values);
+        login(values, {}, (err) => {
+            if (!err) { history.push(routes.superUser); }
+        });
+    };
+
+    const formik = useFormik({
+        initialValues: { email: '', password: '' },
+        onSubmit,
+    });
+
+    return (
+        <Wrapper className={styles.wrapper} isPending={user.state === PENDING}>
+            <div className={styles.formWrapper}>
+                <form onSubmit={formik.handleSubmit}>
+                    <Input
+                        type="text"
+                        name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        placeholder="Email"
+                    />
+                    <Input
+                        type="password"
+                        name="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        placeholder="Password"
+                    />
+                    <Button type="submit" title="Submit" />
+                </form>
+            </div>
+        </Wrapper>
+    );
+};
+
+Login.propTypes = {
+    user: PropTypes.shape({
+        state: PropTypes.string,
+    }),
+    login: PropTypes.func.isRequired,
+    history: ReactRouterPropTypes.history.isRequired,
+};
+
+Login.defaultProps = {
+    user: {},
+};
+
+export default connect(Login);

@@ -1,22 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { Button } from 'components';
+import { withUserInfo } from 'hocs';
+
 import Header from './Header';
 
-import connect from './connect';
+import connect from './Header/connect';
 
-const Main = ({ logout, history }) => (
+const Main = () => (
     <div>
         <Header />
-        <Button title="Logout" onClick={() => logout({ history })} />
     </div>
 );
 
-Main.propTypes = {
-    logout: PropTypes.func.isRequired,
-    history: ReactRouterPropTypes.history.isRequired,
-};
-
-export default connect(Main);
+export default withUserInfo(connect(Main));
