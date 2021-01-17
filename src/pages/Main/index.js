@@ -1,10 +1,6 @@
 import React from 'react';
 
-import { withUserInfo } from 'hocs';
-
-import Header from './Header';
-
-import connect from './Header/connect';
+import { Header } from 'components';
 
 const Main = () => (
     <div>
@@ -12,4 +8,4 @@ const Main = () => (
     </div>
 );
 
-export default withUserInfo(connect(Main));
+export default Main;

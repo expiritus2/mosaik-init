@@ -1,24 +1,44 @@
-import React from 'react';
-import { IDLE, READY, PENDING } from 'settings/constants/apiState';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { IDLE, READY, PENDING, ERROR } from 'settings/constants/apiState';
 
 import connect from './connect';
 
 export default (Component) => {
-    const withUserInfo = ({ routeRoles, user, getCurrentUser, ...props }) => {
+    const WithUserInfo = ({ user, getCurrentUser, ...props }) => {
         const isUserNotInitialised = user.state === IDLE;
-        const isUserInitializationPending = user.state === PENDING;
+        const isPendingRequest = user.state === PENDING;
+        const isError = user.state === ERROR;
+        const userLoggedOut = user.state === READY && (!user.data || !Object.keys(user?.data || {}).length);
 
-        if (isUserInitializationPending) return null;
+        useEffect(() => {
+            if (isUserNotInitialised) {
+                getCurrentUser();
+            }
+        }, []); // eslint-disable-line
 
-        if (isUserNotInitialised) {
-            getCurrentUser();
-        }
+        if (isUserNotInitialised || isPendingRequest) return null;
 
-        const isUserNotAuthorized = user.meta.status === 401
-            || (user.state === READY && (!user.data || !Object.keys(user?.data || {}).length));
-
-        return <Component user={user} isUserNotAuthorized={isUserNotAuthorized} {...props} />;
+        return (
+            <Component
+                {...props}
+                user={user}
+                isPendingRequest={isPendingRequest}
+                isUserAuthorized={!isError && !userLoggedOut}
+            />
+        );
     };
 
-    return connect(withUserInfo);
+    WithUserInfo.propTypes = {
+        user: PropTypes.shape({
+            state: PropTypes.string,
+            data: PropTypes.shape({}),
+            meta: PropTypes.shape({
+                status: PropTypes.number,
+            }),
+        }).isRequired,
+        getCurrentUser: PropTypes.func.isRequired,
+    };
+
+    return connect(WithUserInfo);
 };

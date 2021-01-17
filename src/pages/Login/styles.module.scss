@@ -1,8 +1,9 @@
 @import "styles/functions";
+@import "styles/variables";
 
 .wrapper {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - #{setUnit($header-height)});
 
     .formWrapper {
         width: 100%;

@@ -2,7 +2,7 @@ import { apiServer } from 'settings/web-services/api';
 import { LocalStorage } from 'services';
 
 export function getCurrentUser() {
-    return apiServer.post('/get-user');
+    return apiServer.get('/get-user');
 }
 
 export async function login(cfg) {

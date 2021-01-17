@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { Button } from 'components';
+import { Header, Wrapper } from 'components';
 import { withAuthUser } from 'hocs';
-import connect from './connect';
 
-const SuperUser = ({ logout, history }) => (
+const SuperUser = ({ isPendingRequest }) => (
     <div>
-        <Button title="Logout" onClick={() => logout({ history })} />
-        Super User
+        <Header />
+        <Wrapper isPending={isPendingRequest}>
+            <div>Super User</div>
+        </Wrapper>
     </div>
 );
 
 SuperUser.propTypes = {
-    logout: PropTypes.func.isRequired,
-    history: ReactRouterPropTypes.history.isRequired,
+    isPendingRequest: PropTypes.bool.isRequired,
 };
 
-export default withAuthUser(connect(SuperUser));
+export default withAuthUser(SuperUser);

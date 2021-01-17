@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 
 import { withAuthUser } from 'hocs';
 
-import { Button } from 'components';
-import connect from './connect';
+import { Header, Wrapper } from 'components';
 
-const BrokerageAdmin = ({ logout, history }) => (
+import styles from './styles.module.scss';
+
+const BrokerageAdmin = ({ isPendingRequest }) => (
     <div>
-        <Button title="Logout" onClick={() => logout({ history })} />
-        Brokerage Admin
+        <Header />
+        <Wrapper className={styles.wrapper} isPending={isPendingRequest}>
+            <div>Brokerage Admin</div>
+        </Wrapper>
     </div>
 );
 
 BrokerageAdmin.propTypes = {
-    logout: PropTypes.func.isRequired,
-    history: ReactRouterPropTypes.history.isRequired,
+    isPendingRequest: PropTypes.bool.isRequired,
 };
 
-export default withAuthUser(connect(BrokerageAdmin));
+export default withAuthUser(BrokerageAdmin);

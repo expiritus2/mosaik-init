@@ -11,3 +11,5 @@ export { default as Checkbox } from './Form/Checkbox';
 export { default as Tabs } from './Tabs';
 export { default as ButtonGroup } from './ButtonGroup';
 export { default as Drawer } from './Drawer';
+export { default as Header } from './Header';
+export { default as Forbidden } from './Forbidden';

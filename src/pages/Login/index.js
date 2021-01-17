@@ -4,7 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { useFormik } from 'formik';
 
 import { Logger } from 'services';
-import { Input, Button, Wrapper } from 'components';
+import { Input, Button, Wrapper, Header } from 'components';
 import { PENDING } from 'settings/constants/apiState';
 import { routes } from 'settings/navigation/routes';
 
@@ -26,27 +26,30 @@ const Login = ({ user, login, history }) => {
     });
 
     return (
-        <Wrapper className={styles.wrapper} isPending={user.state === PENDING}>
-            <div className={styles.formWrapper}>
-                <form onSubmit={formik.handleSubmit}>
-                    <Input
-                        type="text"
-                        name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        placeholder="Email"
-                    />
-                    <Input
-                        type="password"
-                        name="password"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        placeholder="Password"
-                    />
-                    <Button type="submit" title="Submit" />
-                </form>
-            </div>
-        </Wrapper>
+        <div>
+            <Header />
+            <Wrapper className={styles.wrapper} isPending={user.state === PENDING}>
+                <div className={styles.formWrapper}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <Input
+                            type="text"
+                            name="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            placeholder="Email"
+                        />
+                        <Input
+                            type="password"
+                            name="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            placeholder="Password"
+                        />
+                        <Button type="submit" title="Submit" />
+                    </form>
+                </div>
+            </Wrapper>
+        </div>
     );
 };
 

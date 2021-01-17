@@ -9,22 +9,18 @@ import { routes } from 'settings/navigation/routes';
 
 import connect from './connect';
 
-const Header = ({ isUserNotAuthorized, logout, history }) => (
-    <div>
-        {isUserNotAuthorized
-            ? <Button title="Login" onClick={() => history.push(routes.login)} />
-            : <Button title="Logout" onClick={() => logout({ history })} />}
-    </div>
+const Actions = ({ isUserAuthorized, history, logout }) => (
+    isUserAuthorized
+        ? <Button title="Logout" onClick={() => logout({ history })} />
+        : <Button title="Login" onClick={() => history.push(routes.login)} />
 );
 
-Header.propTypes = {
+Actions.propTypes = {
     logout: PropTypes.func.isRequired,
     history: ReactRouterPropTypes.history.isRequired,
-    isUserNotAuthorized: PropTypes.bool.isRequired,
+    isUserAuthorized: PropTypes.bool.isRequired,
 };
 
 export default withRouter(
-    withUserInfo(
-        connect(Header),
-    ),
+    withUserInfo(connect(Actions)),
 );
