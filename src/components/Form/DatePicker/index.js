@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FlatPickr from 'react-flatpickr';
 import classNames from 'classnames';
+import moment from 'moment';
 // TODO: Probable react icons should be removed
 import { FiCalendar } from 'react-icons/fi';
 
@@ -26,10 +27,12 @@ const DatePicker = (props) => {
                 name={name}
                 disabled={disabled}
                 className={styles.inputField}
-                value={value}
+                value={value || moment().valueOf()}
                 onChange={onChangeHandler}
                 options={{
                     enableTime: true,
+                    monthSelectorType: 'static',
+                    disableMobile: false,
                     ...options,
                 }}
             />

@@ -4,7 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { useFormik } from 'formik';
 
 import { Logger } from 'services';
-import { Input, Button, Wrapper, Header } from 'components';
+import { Input, Button, Wrapper, Header, DatePicker } from 'components';
 import { PENDING } from 'settings/constants/apiState';
 import { routes } from 'settings/navigation/routes';
 
@@ -46,6 +46,7 @@ const Login = ({ user, login, history }) => {
                             placeholder="Password"
                         />
                         <Button type="submit" title="Submit" />
+                        <DatePicker />
                     </form>
                 </div>
             </Wrapper>
