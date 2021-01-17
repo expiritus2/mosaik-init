@@ -9,11 +9,16 @@ import { routes } from 'settings/navigation/routes';
 
 import connect from './connect';
 
-const Actions = ({ isUserAuthorized, history, logout }) => (
-    isUserAuthorized
-        ? <Button title="Logout" onClick={() => logout({ history })} />
-        : <Button title="Login" onClick={() => history.push(routes.login)} />
-);
+const Actions = ({ isUserAuthorized, history, logout }) => {
+    const goToLoginPage = () => { history.push(routes.login); };
+    const goToMainPage = () => { logout({ history }); };
+
+    return (
+        isUserAuthorized
+            ? <Button title="Logout" onClick={goToMainPage} />
+            : <Button title="Login" onClick={goToLoginPage} />
+    );
+};
 
 Actions.propTypes = {
     logout: PropTypes.func.isRequired,

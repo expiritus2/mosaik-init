@@ -15,10 +15,10 @@ toastr.options = {
 };
 
 const App = () => {
-    const { screen } = useResize();
+    const { screen, mobileOS, isMobile } = useResize();
 
     return (
-        <ScreenContext.Provider value={{ screen }}>
+        <ScreenContext.Provider value={{ screen, mobileOS, isMobile }}>
             <Router>
                 <AppRouter />
             </Router>

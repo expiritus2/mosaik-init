@@ -16,10 +16,9 @@ export default (Component) => {
         const isError = user.state === ERROR;
 
         const notAuthorized = user.meta.status === 401;
-        const forbidden = user.meta.status === 403;
 
         const userRoles = user.data?.roles || [];
-        const isRouteNotIncludesUserRoles = routeRoles.every((routeRole) => !userRoles.includes(routeRole));
+        const userHasNotAccessToRoute = routeRoles.every((routeRole) => !userRoles.includes(routeRole));
         const userLoggedOut = isUserRequestReady && (!user.data || !Object.keys(user?.data || {}).length);
 
         useEffect(() => {
@@ -28,25 +27,20 @@ export default (Component) => {
             }
         }, []); // eslint-disable-line
 
-        if (isUserNotInitialised || isPendingRequest) return null;
-
-        if (isUserRequestReady && isRouteNotIncludesUserRoles) {
-            return <Forbidden />;
-            // return <NotFound />;
-        }
+        if (isUserNotInitialised) return null;
 
         if (userLoggedOut) {
-            return <Redirect to={routes.index} />;
+            return <Redirect to={routes.login} />;
+        }
+
+        if (isUserRequestReady && userHasNotAccessToRoute) {
+            return <Forbidden />;
+            // return <NotFound />;
         }
 
         if (isError) {
             if (notAuthorized) {
                 return <Redirect to={routes.login} />;
-            }
-
-            if (forbidden) {
-                return <Forbidden />;
-                // return <NotFound />;
             }
         }
 

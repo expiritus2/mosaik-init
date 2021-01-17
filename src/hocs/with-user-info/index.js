@@ -15,7 +15,7 @@ export default (Component) => {
 
         useEffect(() => {
             if (isUserNotInitialised) {
-                getCurrentUser();
+                getCurrentUser({}, { showError: false });
             }
         }, []); // eslint-disable-line
 
@@ -25,7 +25,6 @@ export default (Component) => {
             <Component
                 {...props}
                 user={user}
-                isPendingRequest={isPendingRequest}
                 isUserAuthorized={!isError && !userLoggedOut}
             />
         );
