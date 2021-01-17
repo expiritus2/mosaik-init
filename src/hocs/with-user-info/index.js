@@ -8,8 +8,10 @@ export default (Component) => {
     const WithUserInfo = ({ user, getCurrentUser, ...props }) => {
         const isUserNotInitialised = user.state === IDLE;
         const isPendingRequest = user.state === PENDING;
+        const isUserRequestReady = user.state === READY;
         const isError = user.state === ERROR;
-        const userLoggedOut = user.state === READY && (!user.data || !Object.keys(user?.data || {}).length);
+
+        const userLoggedOut = isUserRequestReady && (!user.data || !Object.keys(user?.data || {}).length);
 
         useEffect(() => {
             if (isUserNotInitialised) {

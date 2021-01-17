@@ -13,6 +13,6 @@ export default [
         path: routes.admin,
         Component: BrokerageAdmin,
         exact: true,
-        roles: [BROKERAGE_ADMIN],
+        roles: [SUPER_USER, BROKERAGE_ADMIN],
     },
 ];

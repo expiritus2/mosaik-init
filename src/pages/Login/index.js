@@ -16,7 +16,7 @@ const Login = ({ user, login, history }) => {
     const onSubmit = (values) => {
         Logger.log(values);
         login(values, {}, (err) => {
-            if (!err) { history.push(routes.superUser); }
+            if (!err) { history.push(routes.index); }
         });
     };
 
