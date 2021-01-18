@@ -2,6 +2,8 @@
 @import "styles/variables";
 
 .wrapper {
+    height: 100vh;
+
     .formWrapper {
         width: 100%;
         max-width: setUnit(400);

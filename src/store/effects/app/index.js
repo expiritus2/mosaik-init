@@ -23,7 +23,7 @@ export const appInitEffect = () => async (dispatch) => {
             return;
         }
 
-        await dispatch(userGetDataEffect());
+        await dispatch(userGetDataEffect({}, { showError: false }));
 
         dispatch(appInitAction({ auth: true }));
     } catch (err) {
@@ -35,7 +35,6 @@ export const appInitEffect = () => async (dispatch) => {
             }
         }
 
-        // TODO: redirect to login page? Or not
         dispatch(appInitAction({ auth: false }));
     }
 };
