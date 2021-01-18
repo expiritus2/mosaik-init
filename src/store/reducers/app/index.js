@@ -22,5 +22,8 @@ export default handleActions({
         data: getDataFor('data', payload, initialData),
         meta: getDataFor('meta', payload, initialData),
     }),
-    [appLogoutAction]: () => initialData,
+    [appLogoutAction]: () => ({
+        ...initialData,
+        auth: false,
+    }),
 }, initialData);

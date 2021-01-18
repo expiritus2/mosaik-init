@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 import Api from 'store/effects/core/api';
 import { getTestData, getPins } from 'api/app';
 import { requestGetTestAction, appLogoutAction, getTestPinsAction, appInitAction } from 'store/actions/app';
@@ -11,7 +13,7 @@ export const appLogoutEffect = () => async (dispatch) => {
 
     dispatch(appLogoutAction());
 
-    // TODO: redirect to main page
+    dispatch(push('/login'));
 };
 
 export const appLoginEffect = () => async () => {
@@ -34,12 +36,11 @@ export const appInitEffect = () => async (dispatch) => {
         dispatch(appInitAction({ auth: true }));
     } catch (err) {
         if (err?.response?.status === 401) {
-            // TODO: redirect on login page
-            console.log('401: redirect to login page');
+            dispatch(push('/login'));
             // TODO: show wrong token norifications
         }
 
-        // TODO: redirect to login page
+        // TODO: redirect to login page? Or not
         dispatch(appInitAction({ auth: false }));
     }
 };
