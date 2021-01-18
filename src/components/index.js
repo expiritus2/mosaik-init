@@ -12,3 +12,4 @@ export { default as Tabs } from './Tabs';
 export { default as ButtonGroup } from './ButtonGroup';
 export { default as AppLoading } from './AppLoading';
 export { default as Header } from './Header';
+export { default as Drawer } from './Drawer';
