@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import routesConfig from 'settings/navigation/config';
+import { NotFound } from 'pages';
 
 const AppRouter = () => (
     <Switch>
@@ -13,7 +14,7 @@ const AppRouter = () => (
                     key={path}
                     path={path}
                     render={(props) => (
-                        <Component {...routeRoles} {...props} />
+                        Component ? <Component {...routeRoles} {...props} /> : <NotFound />
                     )}
                     exact={exact}
                 />
