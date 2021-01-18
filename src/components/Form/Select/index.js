@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import SelectSearch from 'react-select-search';
 import { find, get } from 'lodash-es';
@@ -11,7 +11,7 @@ const SelectComponent = (props) => {
     const { name, search, multiple, placeholder, value, disabled, error } = props;
     const { printOptions } = props;
 
-    const onChange = (val) => {
+    const onChange = useCallback((val) => {
         const valueObj = find(options, { value: val });
         const fakeEvent = { target: { value: valueObj, name } };
 
@@ -22,7 +22,7 @@ const SelectComponent = (props) => {
         }
 
         onSelect(fakeEvent, valueObj);
-    };
+    }, [name, onSelect, options]);
 
     const renderValue = (valueProps) => (
         <input

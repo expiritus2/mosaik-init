@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { GiCheckMark } from 'react-icons/gi';
 import classNames from 'classnames';
@@ -12,11 +12,11 @@ const CheckboxComponent = (props) => {
 
     const [checkedValue, setCheckedValue] = useState(checked);
 
-    const onChangeHandler = (event) => {
+    const onChangeHandler = useCallback((event) => {
         const { value } = event.target;
         setCheckedValue((prevVal) => !prevVal);
         onChange(event, value);
-    };
+    }, [onChange]);
 
     return (
         <div>

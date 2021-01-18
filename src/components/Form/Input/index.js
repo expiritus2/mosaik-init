@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -11,16 +11,16 @@ const Input = (props) => {
     const { placeholder, disabled, error } = props;
     const [inputValue, setInputValue] = useState(value);
 
-    const onChangeHandler = (event) => {
+    const onChangeHandler = useCallback((event) => {
         const { value: inputVal } = event.target;
 
-        if (type === Input.TYPE_NUMBER && (!isFloatStr(inputVal) && inputVal !== '')) {
+        if (type === 'number' && (!isFloatStr(inputVal) && inputVal !== '')) {
             return;
         }
 
         setInputValue(inputVal);
         onChange(event, inputVal);
-    };
+    }, [onChange, type]);
 
     return (
         <div className={classNames(styles.inputWrapper, className)}>
@@ -38,10 +38,6 @@ const Input = (props) => {
         </div>
     );
 };
-
-Input.TYPE_TEXT = 'text';
-Input.TYPE_NUMBER = 'number';
-Input.TYPE_SEARCH = 'search';
 
 Input.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -61,7 +57,7 @@ Input.defaultProps = {
     name: undefined,
     placeholder: undefined,
     className: '',
-    type: Input.TYPE_TEXT,
+    type: 'text',
     label: undefined,
     onChange: () => {},
     value: '',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { filter } from 'lodash-es';
 import classNames from 'classnames';
@@ -12,20 +12,20 @@ const ButtonGroup = (props) => {
     const { className, buttonClassName, disabled } = props;
     const [activeButtons, setActiveButtons] = useState(activeBtns);
 
-    const pushOrRemove = (id) => (
+    const pushOrRemove = useCallback((id) => (
         activeButtons.includes(id)
             ? filter(activeButtons, (activeId) => activeId !== id)
             : [...(multiple ? activeButtons : []), id]
-    );
+    ), [activeButtons, multiple]);
 
-    const onClick = (id) => {
+    const onClick = useCallback((id) => {
         if (disabled) return null;
 
         const newActives = pushOrRemove(id);
 
         setActiveButtons(newActives);
         onChange(newActives);
-    };
+    }, [onChange, pushOrRemove, disabled]);
 
     return (
         <div className={classNames(styles.buttons, { [styles.disabled]: disabled }, className)}>
