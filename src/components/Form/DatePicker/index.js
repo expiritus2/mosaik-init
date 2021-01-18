@@ -6,8 +6,6 @@ import moment from 'moment';
 // TODO: Probable react icons should be removed
 import { FiCalendar } from 'react-icons/fi';
 
-import { useScreen } from 'hooks';
-
 import styles from './styles.module.scss';
 import './styles.scss';
 
@@ -15,26 +13,20 @@ const DatePicker = (props) => {
     const { id, name, value, onChange, className, options, label } = props;
     const { placeholder, disabled, error } = props;
 
-<<<<<<< HEAD
     const onChangeHandler = useCallback((newDate) => {
-=======
-    const { isMobile } = useScreen();
-
-    const onChangeHandler = (newDate) => {
->>>>>>> feat(components): protect routes
         onChange({ target: { value: newDate, name } }, newDate);
     }, [name, onChange]);
 
     return (
         <div className={classNames(styles.dateInput, className)}>
             {label && <label htmlFor={id}>{label}</label>}
-            {!isMobile && <div className={styles.icon}><FiCalendar /></div>}
+            <div className={styles.icon}><FiCalendar /></div>
             <FlatPickr
                 id={id}
                 placeholder={placeholder}
                 name={name}
                 disabled={disabled}
-                className={classNames(styles.inputField, { [styles.mobile]: isMobile })}
+                className={styles.inputField}
                 value={value || moment().valueOf()}
                 onChange={onChangeHandler}
                 options={{
