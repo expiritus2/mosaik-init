@@ -18,7 +18,7 @@ export default (Component) => {
         const notAuthorized = user.meta.status === 401;
 
         const userRoles = user.data?.roles || [];
-        const userHasNotAccessToRoute = routeRoles.every((routeRole) => !userRoles.includes(routeRole));
+        const userHasAccessToRoute = userRoles.some((userRole) => routeRoles.includes(userRole));
         const userLoggedOut = isUserRequestReady && (!user.data || !Object.keys(user?.data || {}).length);
 
         useEffect(() => {
@@ -33,7 +33,7 @@ export default (Component) => {
             return <Redirect to={routes.login} />;
         }
 
-        if (isUserRequestReady && userHasNotAccessToRoute) {
+        if (isUserRequestReady && !userHasAccessToRoute) {
             return <Forbidden />;
             // return <NotFound />;
         }
