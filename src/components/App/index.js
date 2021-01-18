@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { useResize } from 'hooks';
@@ -20,9 +19,7 @@ const App = ({ appInit }) => {
     return (
         <ScreenContext.Provider value={{ screen }}>
             <AppLoading>
-                <Router>
-                    <AppRouter />
-                </Router>
+                <AppRouter />
             </AppLoading>
             <MenuDrawer />
         </ScreenContext.Provider>

@@ -30,7 +30,6 @@ export default handleActions({
         data: getDataFor('data', payload, initialData),
         meta: getDataFor('meta', payload, initialData),
     }),
-    [appLogoutAction]: () => initialData,
     [appOpenSearchDrawerAction]: (state, { payload }) => ({
         ...state,
         isSearchDrawerOpen: payload.isOpen,
@@ -38,5 +37,9 @@ export default handleActions({
     [appOpenMenuDrawerAction]: (state, { payload }) => ({
         ...state,
         isMenuDrawerOpen: payload.isOpen,
+    }),
+    [appLogoutAction]: () => ({
+        ...initialData,
+        auth: false,
     }),
 }, initialData);
