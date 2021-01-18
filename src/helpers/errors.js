@@ -16,12 +16,6 @@ export const showErrorMessage = (err) => {
         return;
     }
 
-    const graphQlErrors = get(err, 'graphQLErrors');
-    if (graphQlErrors) {
-        loopErrors(graphQlErrors);
-        return;
-    }
-
     const message = get(err, 'message');
     if (message) {
         toastr.error(message);

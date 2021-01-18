@@ -1,10 +1,9 @@
-import { push } from 'connected-react-router';
-
-import { appLogoutAction, appInitAction } from 'store/actions/app';
-import { userGetDataEffect } from 'store/effects/user';
-import { LocalStorage } from 'services';
 import { getState } from 'store';
+import { LocalStorage } from 'services';
+import { push } from 'connected-react-router';
+import { userGetDataEffect } from 'store/effects/user';
 import { protectedRoutes } from 'settings/navigation/config';
+import { appLogoutAction, appInitAction } from 'store/actions/app';
 
 export const appLogoutEffect = () => async (dispatch) => {
     LocalStorage.removeToken();
