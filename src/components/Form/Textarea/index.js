@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -10,12 +10,12 @@ const Textarea = (props) => {
 
     const [inputValue, setTextareaValue] = useState(value);
 
-    const onChangeHandler = (event) => {
+    const onChangeHandler = useCallback((event) => {
         const { value: inputVal } = event.target;
 
         setTextareaValue(inputVal);
         onChange(event, inputVal);
-    };
+    }, [onChange]);
 
     return (
         <div className={classNames(styles.inputWrapper, className)}>

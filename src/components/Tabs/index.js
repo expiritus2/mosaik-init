@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
@@ -23,11 +23,11 @@ const Tabs = (props) => {
         ? (locationSrv.getQuery()[queryParamName] || activeTabIndex)
         : activeTabIndex);
 
-    const onClick = (index) => (
+    const onClick = useCallback((index) => (
         enableQueryParams
             ? history.replace(locationSrv.setQuery({ [queryParamName]: index + 1 }))
             : setActiveTab(index)
-    );
+    ), [enableQueryParams, history, queryParamName]);
 
     const getIsActiveTab = (index) => {
         if (enableQueryParams) {

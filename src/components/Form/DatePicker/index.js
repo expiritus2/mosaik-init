@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FlatPickr from 'react-flatpickr';
 import classNames from 'classnames';
@@ -12,9 +12,9 @@ const DatePicker = (props) => {
     const { id, name, value, onChange, className, options, label } = props;
     const { placeholder, disabled, error } = props;
 
-    const onChangeHandler = (newDate) => {
+    const onChangeHandler = useCallback((newDate) => {
         onChange({ target: { value: newDate, name } }, newDate);
-    };
+    }, [name, onChange]);
 
     return (
         <div className={classNames(styles.dateInput, className)}>

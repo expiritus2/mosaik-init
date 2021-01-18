@@ -1,14 +1,15 @@
 import { useEffect, useState, useCallback } from 'react';
 import { DESKTOP, MOBILE, MOBILE_SMALL } from 'settings/constants/screen';
+import { getMobileOperatingSystem } from 'contexts/screen';
 
 const useResize = () => {
     const [screen, setScreen] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
-        desktop: window.innerWidth > DESKTOP,
-        tablet: window.innerWidth <= DESKTOP && window.innerWidth > MOBILE,
-        mobile: window.innerWidth <= MOBILE,
-        mobileSmall: window.innerWidth <= MOBILE_SMALL,
+        desktopWidth: window.innerWidth > DESKTOP,
+        tabletWidth: window.innerWidth <= DESKTOP && window.innerWidth > MOBILE,
+        mobileWidth: window.innerWidth <= MOBILE,
+        mobileSmallWidth: window.innerWidth <= MOBILE_SMALL,
     });
 
     const handleResize = useCallback(() => {
@@ -16,13 +17,16 @@ const useResize = () => {
 
         const width = innerWidth;
         const height = innerHeight;
-        const desktop = width > DESKTOP;
-        const tablet = width <= DESKTOP && width > MOBILE;
-        const mobile = width <= MOBILE;
-        const mobileSmall = width <= MOBILE_SMALL;
+        const desktopWidth = width > DESKTOP;
+        const tabletWidth = width <= DESKTOP && width > MOBILE;
+        const mobileWidth = width <= MOBILE;
+        const mobileSmallWidth = width <= MOBILE_SMALL;
 
-        setScreen({ width, height, desktop, tablet, mobile, mobileSmall });
+        setScreen({ width, height, desktopWidth, tabletWidth, mobileWidth, mobileSmallWidth });
     }, []);
+
+    const mobileOS = getMobileOperatingSystem();
+    const isMobile = Object.values(mobileOS).some((os) => os);
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
@@ -30,7 +34,7 @@ const useResize = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []); // eslint-disable-line
 
-    return { screen };
+    return { screen, mobileOS, isMobile };
 };
 
 export default useResize;
