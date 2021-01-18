@@ -7,17 +7,17 @@ import { Header, Wrapper } from 'components';
 
 import styles from './styles.module.scss';
 
-const BrokerageAdmin = ({ isPendingRequest }) => (
+const BrokerageAdmin = ({ isPendingUserRequest }) => (
     <div>
         <Header />
-        <Wrapper className={styles.wrapper} isPending={isPendingRequest}>
+        <Wrapper className={styles.wrapper} isPending={isPendingUserRequest}>
             <div>Brokerage Admin</div>
         </Wrapper>
     </div>
 );
 
 BrokerageAdmin.propTypes = {
-    isPendingRequest: PropTypes.bool.isRequired,
+    isPendingUserRequest: PropTypes.bool.isRequired,
 };
 
 export default withAuthUser(BrokerageAdmin);

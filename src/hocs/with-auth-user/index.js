@@ -11,7 +11,7 @@ import connect from './connect';
 export default (Component) => {
     const WithAuthUser = ({ routeRoles, user, getCurrentUser, ...props }) => {
         const isUserNotInitialised = user.state === IDLE;
-        const isPendingRequest = user.state === PENDING;
+        const isPendingUserRequest = user.state === PENDING;
         const isUserRequestReady = user.state === READY;
         const isError = user.state === ERROR;
 
@@ -44,7 +44,7 @@ export default (Component) => {
             }
         }
 
-        return <Component {...props} isPendingRequest={isPendingRequest} user={user} />;
+        return <Component {...props} isPendingUserRequest={isPendingUserRequest} user={user} />;
     };
 
     WithAuthUser.propTypes = {

@@ -6,17 +6,17 @@ import { withAuthUser } from 'hocs';
 
 import styles from './styles.module.scss';
 
-const SuperUser = ({ isPendingRequest }) => (
+const SuperUser = ({ isPendingUserRequest }) => (
     <div>
         <Header />
-        <Wrapper className={styles.wrapper} isPending={isPendingRequest}>
+        <Wrapper className={styles.wrapper} isPending={isPendingUserRequest}>
             <div>Super User</div>
         </Wrapper>
     </div>
 );
 
 SuperUser.propTypes = {
-    isPendingRequest: PropTypes.bool.isRequired,
+    isPendingUserRequest: PropTypes.bool.isRequired,
 };
 
 export default withAuthUser(SuperUser);

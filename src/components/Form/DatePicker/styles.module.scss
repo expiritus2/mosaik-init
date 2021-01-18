@@ -29,6 +29,10 @@
     .inputField {
         cursor: pointer;
         padding-left: setUnit(30);
+
+        &.mobile {
+            padding-left: setUnit(5);
+        }
     }
 
     .error {
