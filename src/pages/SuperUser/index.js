@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Header } from 'components';
 
-const Main = () => (
+const SuperUser = () => (
     <div>
         <Header />
+        <div>Super User</div>
     </div>
 );
 
-export default Main;
+export default SuperUser;

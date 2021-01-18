@@ -6,5 +6,5 @@ export const jsonPlaceholderServer = axios.create({
 
 // TODO: temp
 export const mockableIoServer = axios.create({
-    baseURL: 'http://demo8539896.mockable.io/',
+    baseURL: 'https://demo6107551.mockable.io/api',
 });

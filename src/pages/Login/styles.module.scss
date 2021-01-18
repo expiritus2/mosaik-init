@@ -1,0 +1,9 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.wrapper {
+    .formWrapper {
+        width: 100%;
+        max-width: setUnit(400);
+    }
+}

@@ -1,12 +1,10 @@
 import { push } from 'connected-react-router';
 
-import Api from 'store/effects/core/api';
-import { getTestData, getPins } from 'api/app';
-import { requestGetTestAction, appLogoutAction, getTestPinsAction, appInitAction } from 'store/actions/app';
+import { appLogoutAction, appInitAction } from 'store/actions/app';
 import { userGetDataEffect } from 'store/effects/user';
 import { LocalStorage } from 'services';
-
-export const appLoadEffect = Api.execBase({ action: requestGetTestAction, method: getTestData });
+import { getState } from 'store';
+import { protectedRoutes } from 'settings/navigation/config';
 
 export const appLogoutEffect = () => async (dispatch) => {
     LocalStorage.removeToken();
@@ -14,12 +12,6 @@ export const appLogoutEffect = () => async (dispatch) => {
     dispatch(appLogoutAction());
 
     dispatch(push('/login'));
-};
-
-export const appLoginEffect = () => async () => {
-    // TODO: get form login/pass from params, send request
-    // TODO: temp set random token for tests
-    LocalStorage.setToken('mockAccessToken');
 };
 
 export const appInitEffect = () => async (dispatch) => {
@@ -36,13 +28,14 @@ export const appInitEffect = () => async (dispatch) => {
         dispatch(appInitAction({ auth: true }));
     } catch (err) {
         if (err?.response?.status === 401) {
-            dispatch(push('/login'));
-            // TODO: show wrong token norifications
+            const state = getState();
+            const isProtectedRoute = protectedRoutes.includes(state.router.location.pathname);
+            if (isProtectedRoute) {
+                dispatch(push('/login'));
+            }
         }
 
         // TODO: redirect to login page? Or not
         dispatch(appInitAction({ auth: false }));
     }
 };
-
-export const loadPinsEffect = Api.execBase({ action: getTestPinsAction, method: getPins });

@@ -1,11 +1,13 @@
+import React from 'react';
 import { routes } from 'settings/navigation/routes';
 import { BROKERAGE_ADMIN, SUPER_USER } from 'settings/constants/roles';
-import React from 'react';
+
+import { SuperUser } from 'pages';
 
 export default [
     {
         path: routes.superUser,
-        component: () => <div>Super user page</div>,
+        component: SuperUser,
         exact: true,
         roles: [SUPER_USER],
     },
@@ -13,6 +15,6 @@ export default [
         path: routes.admin,
         component: () => <div>Brokerage user page</div>,
         exact: true,
-        roles: [SUPER_USER, BROKERAGE_ADMIN],
+        roles: [BROKERAGE_ADMIN],
     },
 ];

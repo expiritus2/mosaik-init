@@ -1,4 +1,5 @@
-import { PENDING, READY, ERROR } from 'settings/constants/api-state';
+import { PENDING, READY, ERROR } from 'settings/constants/apiState';
+import { showErrorMessage } from 'helpers/errors';
 
 export default class Api {
     /**
@@ -7,9 +8,12 @@ export default class Api {
      * @returns function passing cfg = {}, options = {} for the method and cb(error, result) function
      */
     static execBase({ action, method }) {
-        return (cfg = {}, options = {}, cb) => (
-            Api.execFunc({ cfg, options, action, method, cb })
-        );
+        return (cfg = {}, options = {}, cb) => {
+            const opts = { showError: true, ...options };
+            return (
+                Api.execFunc({ cfg, options: opts, action, method, cb })
+            );
+        };
     }
 
     /**
@@ -19,9 +23,12 @@ export default class Api {
      * @returns {function(*=, *=, *): function(*): Promise<void>}
      */
     static execResult({ action, method }) {
-        return (cfg = {}, options = {}, cb) => (
-            Api.execFunc({ cfg, options, action, method, pending: false, cb })
-        );
+        return (cfg = {}, options = {}, cb) => {
+            const opts = { showError: true, ...options };
+            return (
+                Api.execFunc({ cfg, options: opts, action, method, pending: false, cb })
+            );
+        };
     }
 
     /**
@@ -35,27 +42,35 @@ export default class Api {
      * @returns {function(*): Promise<void>}
      */
     static execFunc({ cfg, options, action, method, pending = true, cb }) {
+        const { showError, ...opts } = options;
+
         return async (dispatch) => {
             if (pending) {
                 Api.setPending({ dispatch, action });
             }
 
             try {
-                const response = await method(cfg, options);
+                const response = await method(cfg, opts);
                 Api.setData({ dispatch, action, cfg: { ...cfg, ...response.meta }, response });
 
                 if (typeof cb === 'function') {
                     cb(null, response);
                 }
-
-                return response;
             } catch (err) {
-                const config = { ...cfg, status: err?.response?.status, message: err.message };
+                const config = {
+                    ...cfg,
+                    status: err?.response?.status || err?.networkError?.statusCode,
+                    message: err.message,
+                };
 
                 Api.setError({ dispatch, action, cfg: config, response: err });
 
                 if (typeof cb === 'function') {
                     cb(err);
+                }
+
+                if (showError) {
+                    showErrorMessage(err);
                 }
 
                 throw err;
